@@ -46,11 +46,11 @@ if(txt_poa==null){
 				</div>
 			</div>
 						
-			<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:75%; left:20%; margin-left:0px; height:550px;">
+			<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:80%; left:10%; margin-left:0px; top:5px; height:650px;">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
 					</div>
-					<div class="modal-body" style="height:500px; max-height: 550px"></div>
+					<div class="modal-body" style="height:600px; max-height: 650px"></div>
 			</div>
 		</div>
 	</div>

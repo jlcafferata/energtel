@@ -22,7 +22,7 @@ if(accion==null){
 <div id="div_cabecera">
 	<div class="row">
 		<div class="span3" style="text-align:right">POA/OT</div>
-		<div class="span3"><input name="txt_poa" id="txt_poa_ejecucion" style="width:80px" type="text" value="<%=poa%>"/></div>
+		<div class="span3"><input name="txt_poa" id="txt_poa_ejecucion" style="width:80px" type="text" value="<%=poa%>" disabled/></div>
 		<div class="span3" style="text-align:right">Tipo obra</div>
 		<div class="span3"><input name="txt_tipo_obra" id="txt_tipo_obra" style="width:150px" type="text" /></div>
 	</div>

@@ -41,7 +41,12 @@ function guardar(accion, modalidad){
 		}else if(accion='iniciar'){
 				estado='EJE';
 		}
-		    
+		
+		var txt_fecha_certificacion=fecha_formateada(txt_fecha_certificacion);
+    var txt_fecha_cierre=fecha_formateada(txt_fecha_cierre);
+    var txt_fecha_pago=fecha_formateada(txt_fecha_pago);
+    
+    
 		if(modalidad=='A'){//alta
 			confirmar_alta(estado);
 	  } else if(modalidad=='M'){ //modificacion
