@@ -1,0 +1,174 @@
+function onload(){
+	ng.ready( function() {
+	    var cal_fecha_inicio = new ng.Calendar({
+   	 	input: 'txt_fecha_inicio', // the input field id
+		start_date: 'last year -20', // the start date (default is today)
+		end_date: 'year +20', // the end date (related to start_date, 4 years from today)
+		display_date: new Date() // the display date (default is start_date)
+		});
+	    var cal_fecha_cierre = new ng.Calendar({
+   	 	input: 'txt_fecha_cierre', // the input field id
+		start_date: 'year -20', // the start date (default is today)
+		end_date: 'year +20', // the end date (related to start_date, 4 years from today)
+		display_date: new Date() // the display date (default is start_date)
+		});
+		var cal_fecha_certificacion = new ng.Calendar({
+   	 	input: 'txt_fecha_certificacion', // the input field id
+		start_date: 'year -20', // the start date (default is today)
+		end_date: 'year +20', // the end date (related to start_date, 4 years from today)
+		display_date: new Date() // the display date (default is start_date)
+		});
+		var cal_fecha_pago = new ng.Calendar({
+   	 	input: 'txt_fecha_pago', // the input field id
+		start_date: 'year -20', // the start date (default is today)
+		end_date: 'year +20', // the end date (related to start_date, 4 years from today)
+		display_date: new Date() // the display date (default is start_date)
+		});
+	});	
+}
+
+function guardar(accion){
+		if(accion=='alta'){
+			confirmar_alta();
+		}
+}
+
+
+function validar_datos(){
+    var mensaje='';
+    var txt_poa=         				$("#txt_poa").val(),          
+        txt_cuil=        				$("#txt_cuil").val(),
+        txt_fecha_inicio=    	  $("#txt_fecha_inicio").val(),       
+        txt_fecha_cierre=     	$("#txt_fecha_cierre").val(),     
+        txt_fecha_certificacion=$("#txt_fecha_certificacion").val(),       
+        cbo_zona_obra_alta=     $("#cbo_zona_obra_alta").val(),        
+        cbo_tipo_obra_alta=    	$("#cbo_tipo_obra_alta").val(),        
+        txt_medicion_estimada=  $("#txt_medicion_estimada").val(),
+        cbo_especificacion_obra=$("#cbo_especificacion_obra").val(),   
+        cbo_forma_obra=  				$("#cbo_forma_obra").val(),
+        txt_fecha_pago=					$("#txt_fecha_pago").val(),
+        txt_nro_recibo=					$("#txt_nro_recibo").val(),
+        txt_nro_orden_compra=		$("#txt_nro_orden_compra").val(),
+        txt_orden_compra=				$("#txt_orden_compra").val(),
+        txt_observacion=				$("#txt_observacion").val();
+    
+    
+    if(typeof(txt_fecha_inicio)=='undefined'){
+    	txt_fecha_inicio='';
+    }
+    if(typeof(txt_fecha_certificacion)=='undefined'){
+    	txt_fecha_certificacion='';
+    }
+    if(typeof(txt_fecha_cierre)=='undefined'){
+    	txt_fecha_cierre='';
+    }
+    if(typeof(txt_fecha_pago)=='undefined'){
+    	txt_fecha_pago='';
+    }
+    
+    
+    txt_fecha_inicio=fecha_formateada(txt_fecha_inicio);
+    txt_fecha_certificacion=fecha_formateada(txt_fecha_certificacion);
+    txt_fecha_cierre=fecha_formateada(txt_fecha_cierre);
+    txt_fecha_pago=fecha_formateada(txt_fecha_pago);
+    
+    if(txt_fecha_cierre!='' && txt_fecha_inicio!='' && (txt_fecha_cierre-txt_fecha_inicio)<0){
+    	mensaje+='* La fecha de cierre no puede ser menor a la fecha de inicio \n';	
+    }
+    
+        
+    if(txt_poa==''){
+        mensaje+='* Debe ingresar POA \n';
+    }     
+    if(txt_cuil!='' && txt_cuil.length<13){
+        mensaje+='* Debe ingresar un cuil valido \n';
+    }
+    if(cbo_tipo_obra_alta==''){
+        mensaje+='* Debe ingresar Tipo Obra \n';
+    }
+    if(cbo_zona_obra_alta==''){
+        mensaje+='* Debe ingresar Zona \n';
+    }
+    
+    if(txt_medicion_estimada==''){
+        mensaje+='* Debe ingresar medicion estimada \n';
+    }
+    
+    if(cbo_especificacion_obra==''){
+        mensaje+='* Debe ingresar especificacion de obra \n';
+    }
+    
+    if(cbo_forma_obra==''){
+        mensaje+='* Debe ingresar forma de obra \n';
+    }        
+    if(txt_nro_recibo!='' && txt_nro_recibo<'0'){
+        mensaje+='* El nro de recibo debe ser mayor a 0 \n';
+    }    
+    
+    if(txt_nro_orden_compra!='' && txt_nro_orden_compra<'0'){
+        mensaje+='* El nro de orden de compra debe ser mayor a 0 \n';
+    } 
+    
+    if(txt_orden_compra!='' && txt_orden_compra<'0'){
+        mensaje+='* El valor de la orden de compra debe ser mayor a 0 \n';
+    }
+    
+    
+    if(mensaje!=''){
+        alert(mensaje);
+        return false;
+    } else{
+        return true;
+    }
+}
+
+function confirmar_alta(){
+    if(!validar_datos()){
+        return false;
+    }    
+    if($("#txt_fecha_alta_alta").val()===''){
+        if(!confirm('No ingresó fecha de alta. Será grabado como empleado en stand by. Desea continuar?')){
+            return false;
+        }
+    }
+    var parametros={
+        accion: 'A',
+        txt_legajo_alta:      $("#txt_legajo_alta").val(),       
+        txt_apellido_alta:    $("#txt_apellido_alta").val(),     
+        txt_nombre_alta:      $("#txt_nombre_alta").val(),       
+        cbo_estudio:          $("#cbo_estudio").val(),           
+        txt_fecha_alta_alta:  $("#txt_fecha_alta_alta").val(),   
+        txt_fecha_baja_alta:  $("#txt_fecha_baja_alta").val(),   
+        cbo_tipo_documento:   $("#cbo_tipo_documento").val(),          
+        txt_dni_alta:         $("#txt_dni_alta").val(),          
+        txt_cuil_alta:        $("#txt_cuil_alta").val(),         
+        txt_nacionalidad_alta:$("#txt_nacionalidad_alta").val(), 
+        txt_fecha_nac_alta:   $("#txt_fecha_nac_alta").val(),    
+        cbo_estado_civil:     $("#cbo_estado_civil").val(),      
+        txt_hijos_alta:       $("#txt_hijos_alta").val(),        
+        txt_email_alta:       $("#txt_email_alta").val(),        
+        txt_telefono_alta:    $("#txt_telefono_alta").val(),        
+        txt_celular_alta:     $("#txt_celular_alta").val(),        
+        cbo_categoria:        $("#cbo_categoria").val(),    
+        cbo_situacion_empleado:$("#cbo_situacion_empleado").val(),
+        txt_calle_legal_alta: $("#txt_calle_legal_alta").val(),  
+        txt_nro_legal_alta:   $("#txt_nro_legal_alta").val(),    
+        cbo_provincia_legal:  $("#cbo_provincia_legal").val(),   
+        cbo_partido_legal:    $("#cbo_partido_legal").val(),     
+        cbo_localidad_legal:  $("#cbo_localidad_legal").val(),   
+        txt_cp_legal_alta:    $("#txt_cp_legal_alta").val(),     
+        txt_calle_real_alta:  $("#txt_calle_real_alta").val(),   
+        txt_nro_real_alta:    $("#txt_nro_real_alta").val(),     
+        cbo_provincia_real:   $("#cbo_provincia_real").val(),    
+        cbo_partido_real:     $("#cbo_partido_real").val(),      
+        cbo_localidad_real:   $("#cbo_localidad_real").val(),    
+        txt_cp_real_alta:     $("#txt_cp_real_alta").val(),      
+        txt_pantalon_alta:    $("#txt_pantalon_alta").val(),     
+        txt_camisa_alta:      $("#txt_camisa_alta").val(),       
+        txt_calzado_alta:     $("#txt_calzado_alta").val(),      
+        txt_libreta_alta:     $("#txt_libreta_alta").val(),      
+        txt_cta_cese_alta:    $("#txt_cta_cese_alta").val()
+    };
+    console.log(parametros);
+    grabar(parametros);    		
+}
