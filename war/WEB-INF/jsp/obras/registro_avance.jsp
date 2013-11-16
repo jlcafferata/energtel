@@ -39,8 +39,8 @@ if(accion==null){
 			<td width="50%">
 					<fieldset>
 						<legend>Grupo de trabajo</legend>
-                                                       
-                                                        <table class="table table-hover table-bordered table-condensed" width="100%">
+                                                     <div style="height: 200px; overflow: auto;">
+                                                        <table class="table table-hover table-bordered table-condensed" width="100%" id="tabla_empleado">
                                                             <thead>
                                                                 <tr>
                                                                     <th>Apellido</th>
@@ -51,41 +51,40 @@ if(accion==null){
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tag:GrillaEmpleados accion="si"/> 
+                                                              
                                                             </tbody>                               
                                                         </table>
-					
+                                                  </div>                
 					</fieldset>
 				</td>
 				<td>&nbsp;&nbsp;&nbsp;</td>
 				<td width="50%">
 					<fieldset>
 						<legend>Materiales</legend>
-							<table class="table table-hover table-bordered table-condensed" width="100%">
+                                                 <div style="height: 200px; overflow: auto;">
+							<table class="table table-hover table-bordered table-condensed" width="100%" id="tabla_material">
 								<thead>
 									<tr>
 										<th >Material</th>
-										<th >Cantidad</th>
-										<th> <div id="div_button_add_material"><input class="btn  btn-primary"   type="button" name="btn_agregar_material" value="+" style="height:20px" onclick="javascript:ver_materiales()"/></div><div id="div_materiales" style="display:none"><select id="cbo_materiales"><option value="01">Arena</option><option value="01">Cemento</option></select><input class="btn  btn-primary"   type="button" name="btn_ok_add_material" value="si" onclick="javascript:ok_add_material()"/><input class="btn  btn-primary"   type="button" name="btn_close_add_material" value="no" onclick="javascript:cancel_add_material()"/></th> 
+                                                                                <th> Cantidad</th>
+										<th > Stock</th>
+										<th> 
+                                                                                    <div id="div_button_add_material">
+                                                                                        <input class="btn  btn-primary"   type="button" name="btn_agregar_material" value="+" style="height:20px" onclick="javascript:ver_materiales()"/>
+                                                                                    </div>
+                                                                                    <div id="div_materiales" style="display:none">
+                                                                                        <tag:ComboMaterial nombreCombo="cbo_materiales"/>
+                                                                                        <input class="btn  btn-primary"   type="button" name="btn_ok_add_material" value="si" onclick="javascript:ok_add_material()"/>
+                                                                                        <input class="btn  btn-primary"   type="button" name="btn_close_add_material" value="no" onclick="javascript:cancel_add_material()"/>
+                                                                                    </div>    
+                                                                                </th> 
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>Arena</td>
-										<td>100 metros</td>
-										<td>
-											<a href="javascript:" onclick="quitarMaterial(210, this);">Quitar</a>                    
-										</td>
-									</tr>
-									<tr>
-										<td>Cemento</td>
-										<td>50 bolsas</td>
-										<td>
-											<a href="javascript:" onclick="quitarEmpleado(210, this);">Quitar</a>                    
-										</td>
-									</tr>
+									
 								</tbody>
 							</table>
+                                                 </div>                                        
 					</fieldset>
 			</td>
 		</tr>

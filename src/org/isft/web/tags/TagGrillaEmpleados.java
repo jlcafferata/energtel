@@ -97,6 +97,10 @@ public class TagGrillaEmpleados extends TagGrilla {
         return SKIP_BODY;
        }else{// ACA EMPIEZA SI AGREGAREMPLEADO ES TRUE OSEA GENERA UNA TABLA GRILLA QUE MUESTRA LOS EMPLEADOS SEGUN UN POA Y TE PERMITE AGREGAR MAS POR MEDIO DE UNA BOTON
            try{
+               // ESTO ESTA MAL HECHO, PERO SEGURAMENTE USE ESTA SECCION DPS
+               CollectionEmpleado ce=new CollectionEmpleado();
+               HashMap hm=new HashMap();
+               Vector<Empleado> ve=ce.select(hm);
                String table="";
                table+="<tr><td>Diaz</td><td>Nicolas</td>";
                table+="<td><a href=\"javascript:\" onclick=\"quitarEmpleado(210, this);\">Quitar</a></td>";											
