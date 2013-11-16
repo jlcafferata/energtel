@@ -85,6 +85,6 @@ function iniciar_ejecucion(poa){
 }
 
 function modi(poa){
-	$('.modal-body').load("jsp/obras/seguimiento.jsp?accion=alta&poa="+poa+"&modalidad=M");
+	$('.modal-body').load("jsp/obras/seguimiento.jsp?accion=iniciar&poa="+poa+"&modalidad=M");
 	$('#myModal').modal('show');
 }

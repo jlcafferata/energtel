@@ -83,7 +83,7 @@ if(!accion.equals("")){
 	</div>
 	<div class="row">
 		<div class="span2" style="text-align:right">Observaciones</div>
-		<div class="span3"><textarea name="txt_observacion" id="txt_observacion_presupuestadas" style="width: 515px; height: 69px"></textarea></div>	
+		<div class="span3"><textarea name="txt_observacion" id="txt_observacion_presupuestadas" style="width: 515px; height: 69px"><%=detalleObra.getObservaciones()%></textarea></div>	
 	</div>
 	<div class="row">
 	    <div class="span3" style="text-align:right"><input type="button" class="btn btn-primary" value="Guardar" onclick="javascript:guardar(document.getElementById('accion').value, document.getElementById('modalidad').value)"></div>
