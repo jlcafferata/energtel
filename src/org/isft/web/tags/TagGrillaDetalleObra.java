@@ -62,16 +62,16 @@ public class TagGrillaDetalleObra extends TagGrilla {
 		           table+="<td>"+(vec.get(i).getValor_orden_compra()==null?"&nbsp;":vec.get(i).getValor_orden_compra())+"</td>";
 		           table+="<td>"+(vec.get(i).getDescripcion_especificacion()==null?"&nbsp;":vec.get(i).getDescripcion_especificacion())+"</td>";
 		           table+="<td>"+(vec.get(i).getObservaciones()==null?"&nbsp;":vec.get(i).getObservaciones())+"</td>";
-		           if(this.getPagina().equals("pre")){
+		           if(this.getPagina().equals("PRE")){
 		           		table+="<td><a href=\"javascript: modi("+vec.get(i).getPoa()+")\">Editar</a>&nbsp;";
 									table+="<a href=\"javascript: iniciar_ejecucion("+vec.get(i).getPoa()+")\">Iniciar ejecuci&oacute;n</a></td>";	
-		           }else if(this.getPagina().equals("EN_EJECUCION")){
+		           }else if(this.getPagina().equals("EJE")){
 		           		table+="<td><a href=\"javascript: anticipo_obra("+vec.get(i).getPoa()+")\">Anticipo obra</a>&nbsp;<a href=\"javascript: registro_avance("+vec.get(i).getPoa()+")\">Avance obra</a>&nbsp;<a href=\"javascript: certificar("+vec.get(i).getPoa()+")\">Certificar</a></td>";	
-		           }else if(this.getPagina().equals("CERTIFICADA")){
+		           }else if(this.getPagina().equals("CER")){
 		           		table+="<td><a href=\"javascript: pasar_a_en_ejecucion("+vec.get(i).getPoa()+")\">Volver En Ejecuci&oacute;n</a>&nbsp;<a href=\"javascript: facturar("+vec.get(i).getPoa()+")\">Pasar a facturada</a></td>";	
-		           }else if(this.getPagina().equals("FACTURADA")){
+		           }else if(this.getPagina().equals("FAC")){
 		           		table+="<td><a href=\"javascript: pasar_a_certificada("+vec.get(i).getPoa()+")\">Volver a Certificada</a>&nbsp;<a href=\"javascript: cobrar("+vec.get(i).getPoa()+")\">Pasar a Cobrada</a></td>";	
-		           }else if(this.getPagina().equals("COBRADA")){
+		           }else if(this.getPagina().equals("COB")){
 		           		table+="<td><a href=\"javascript: pasar_a_facturada("+vec.get(i).getPoa()+")\">Volver a Facturada</a></td>";	
 		           }
 		           table+="</tr>";		           

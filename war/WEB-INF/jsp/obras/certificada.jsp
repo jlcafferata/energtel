@@ -28,7 +28,7 @@
 			</div>
 			<div class="row">
 				<div class="span12">
-					<tag:GrillaDetalleObra pagina="CERTIFICADA"/>
+					<tag:GrillaDetalleObra pagina="CER"/>
 				</div>
 			</div>
 						

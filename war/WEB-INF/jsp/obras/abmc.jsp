@@ -42,7 +42,7 @@ if(txt_poa==null){
 			</div>
 			<div class="row">
 				<div class="span12">
-					<tag:GrillaDetalleObra pagina="pre" zona="<%=cbo_zona_obra%>" poa="<%=txt_poa%>" tipo_obra="<%=cbo_tipo_obra%>"/>
+					<tag:GrillaDetalleObra pagina="PRE" zona="<%=cbo_zona_obra%>" poa="<%=txt_poa%>" tipo_obra="<%=cbo_tipo_obra%>"/>
 				</div>
 			</div>
 						

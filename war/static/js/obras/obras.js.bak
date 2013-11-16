@@ -15,7 +15,7 @@ function filtrar(){
 	goPage(path);
 }
 function alta(){
-	$('.modal-body').load("jsp/obras/seguimiento.jsp?accion=A");
+	$('.modal-body').load("jsp/obras/seguimiento.jsp?accion=alta");
 	$('#myModal').modal('show');
 }
 

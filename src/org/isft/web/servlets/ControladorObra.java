@@ -37,6 +37,7 @@ public class ControladorObra  extends HttpServlet {
                 String valor_orden_compra_presupuestada = request.getParameter("valor_orden_compra_presupuestada");
                 String observacion_presupuestadas = request.getParameter("observacion_presupuestadas");
                 String legajo_empleado = request.getParameter("legajo_empleado");
+                String estado = request.getParameter("estado");
                 
                 if(accion==null){accion="";}                  
                 if(poa_alta==null){poa_alta="";}                  
@@ -74,7 +75,7 @@ public class ControladorObra  extends HttpServlet {
                 param.put("nro_orden_compra_presupuestada",nro_orden_compra_presupuestada);
                 param.put("valor_orden_compra_presupuestada",valor_orden_compra_presupuestada);
                 param.put("observacion_presupuestadas",observacion_presupuestadas);
-                param.put("estado","pre");
+                param.put("estado",estado);
                 param.put("legajo_empleado","legajo_empleado");
                
         AbmObra abm=new AbmObra();
@@ -82,7 +83,7 @@ public class ControladorObra  extends HttpServlet {
 	try{
             if(accion.equals("A")){
                     abm.insert(param);
-            } else if(accion.equals("AE")){
+            } else if(accion.equals("E")){
                     abm.delete(param);
             } else {
                     abm.update(param);

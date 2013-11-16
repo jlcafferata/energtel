@@ -27,7 +27,7 @@
 			</div>
 			<div class="row">
 				<div class="span12">
-					<tag:GrillaDetalleObra pagina="COBRADA"/>
+					<tag:GrillaDetalleObra pagina="COB"/>
 				</div>
 			</div>
 						

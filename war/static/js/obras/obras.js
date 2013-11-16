@@ -24,6 +24,11 @@ function certificar(poa){
 	$('#myModal').modal('show');
 }
 
+function finalizar_cambios(){
+	$('#myModal').modal('hide');
+	filtrar();
+}
+
 function facturar(poa){
 	$('.modal-body').load("jsp/obras/seguimiento.jsp?accion=facturar");
 	$('#myModal').modal('show');

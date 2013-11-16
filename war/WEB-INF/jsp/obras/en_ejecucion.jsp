@@ -31,7 +31,7 @@
 			</div>
 			<div class="row">
 				<div class="span12">
-					<tag:GrillaDetalleObra pagina="EN_EJECUCION"/>
+					<tag:GrillaDetalleObra pagina="EJE"/>
 				</div>
 			</div>
 						

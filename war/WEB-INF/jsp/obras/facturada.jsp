@@ -27,7 +27,7 @@
 			</div>
 			<div class="row">
 				<div class="span12">
-					<tag:GrillaDetalleObra pagina="FACTURADA"/>
+					<tag:GrillaDetalleObra pagina="FAC"/>
 				</div>
 			</div>
 						
