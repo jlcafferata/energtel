@@ -83,7 +83,7 @@ public class ControladorObra  extends HttpServlet {
 	try{
             if(accion.equals("A")){
                     abm.insert(param);
-            } else if(accion.equals("E")){
+            } else if(accion.equals("B")){
                     abm.delete(param);
             } else {
                     abm.update(param);

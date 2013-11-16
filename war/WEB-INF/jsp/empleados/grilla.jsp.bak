@@ -1,7 +1,0 @@
-<%@ taglib uri="/WEB-INF/tld/taglib.tld" prefix="tag" %>
-<%String incluir_standby=request.getParameter("incluir_standby");
-if(incluir_standby==null){
-	incluir_lista_espera="N";
-}
-%>
-<tag:GrillaEmpleados incluir_lista_espera="<%=incluir_lista_espera%>"/>

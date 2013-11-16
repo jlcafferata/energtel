@@ -28,18 +28,25 @@ function onload(){
 	$("#txt_poa_alta").focus();
 }
 
-function guardar(accion){
+function guardar(accion, modalidad){
+		var estado='';
 		if(accion=='alta'){
-			confirmar_alta('PRE');
+				estado='PRE';
 		}else if(accion=='certificar'){
-			confirmar_alta('CER');
+				estado='CER';
 		}else if(accion=='facturar'){
-			confirmar_alta('FAC');
+				estado='FAC';
 		}else if(accion=='cobrar'){
-			confirmar_alta('COB');
+				estado='COB';
 		}else if(accion='iniciar'){
-			confirmar_alta('EJE');
-		} 
+				estado='EJE';
+		}
+		if(modalidad=='A'){//alta
+			confirmar_alta(estado);
+	  } else if(modalidad=='M'){ //modificacion
+	  	confirmar_modificacion(estado);
+	  }	
+
 		
 }
 
@@ -131,16 +138,39 @@ function validar_datos(){
     
 }
 
+function confirmar_modificacion(estado){
+	  if(!validar_datos()){
+        return false;
+    }    
+
+    var parametros={
+        accion: 'M',
+        poa_alta:                       $("#txt_poa_alta").val(), 
+        cuil:                           $("#txt_cuil").val(),   
+        fecha_inicio:                   $("#txt_fecha_alta_presupuestada").val(),    
+        fecha_cierre:                   $("#txt_fecha_cierre_presupuestada").val(), 
+        fecha_certificacion_presupuestada:  $("#txt_fecha_certificacion_presupuestada").val(), 
+        zona_obra_alta:                 $("#cbo_zona_obra_alta").val(), 
+        tipo_obra_alta:                 $("#cbo_tipo_obra_alta").val(),         
+        medicion_estimada_presupuestada:$("#txt_medicion_estimada_presupuestada").val(),         
+        especificacion_obra:            $("#cbo_especificacion_obra").val(),           
+        forma_obra:                     $("#cbo_forma_obra").val(),         
+        fecha_pago:                     $("#txt_fecha_pago").val(),            
+        nro_recibo_presupuestada:       $("#txt_nro_recibo_presupuestada").val(),  
+        nro_orden_compra_presupuestada: $("#txt_nro_orden_compra_presupuestada").val(),     
+        valor_orden_compra_presupuestada: $("#txt_valor_orden_compra_presupuestada").val(), 
+        observacion_presupuestadas:     $("#txt_observacion_presupuestadas").val(),
+        estado:													estado  
+    };
+    console.log(parametros);
+    grabar(parametros);
+}
+
 function confirmar_alta(estado){
     if(!validar_datos()){
         return false;
     }    
 
-    if($("#txt_fecha_alta_alta").val()===''){
-        if(!confirm('No ingreso fecha de alta. Sera grabado como empleado en stand by. Desea continuar?')){
-            return false;
-        }
-    }
     var parametros={
         accion: 'A',
         poa_alta:                       $("#txt_poa_alta").val(), 
@@ -158,7 +188,7 @@ function confirmar_alta(estado){
         nro_orden_compra_presupuestada: $("#txt_nro_orden_compra_presupuestada").val(),     
         valor_orden_compra_presupuestada: $("#txt_valor_orden_compra_presupuestada").val(), 
         observacion_presupuestadas:     $("#txt_observacion_presupuestadas").val(),
-        estado:													estado.toUpperCase()  
+        estado:													estado  
     };
     console.log(parametros);
     grabar(parametros);    		

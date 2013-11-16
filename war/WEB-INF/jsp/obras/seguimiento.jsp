@@ -13,6 +13,10 @@
 if(accion==null){
 	accion="";
 }
+String modalidad=request.getParameter("modalidad");
+if(modalidad==null){
+	modalidad="";
+}
 String poa=request.getParameter("poa");
 
 if(poa==null){
@@ -33,10 +37,11 @@ if(!accion.equals("")){
 %>
 <body>
 <input type="hidden" id="accion" value="<%=accion%>"/>
+<input type="hidden" id="modalidad" value="<%=modalidad%>"/>
 <div id="div_cabecera" style="margin:10px">
 	<div class="row">
 		<div class="span2" style="text-align:right">POA/OT</div>
-		<div class="span3"><input type="text" name="txt_poa_alta" id="txt_poa_alta"  value="<%=poa%>" style="width:80px" maxlength="9" /></div>
+		<div class="span3"><input type="text" name="txt_poa_alta" id="txt_poa_alta"  value="<%=poa%>" style="width:80px" maxlength="9" <%if(modalidad.equals("M")){%> disabled <%}%>/></div>
 		<div class="span2" style="text-align:right">C.U.I.T cliente</div>
 		<div class="span3"><input name="txt_cuil" id="txt_cuil" type="text" value="<%=detalleObra.getCuit_cliente()%>" maxlength="13" style="width:120px"/></div>
 	</div>
@@ -81,7 +86,7 @@ if(!accion.equals("")){
 		<div class="span3"><textarea name="txt_observacion" id="txt_observacion_presupuestadas" style="width: 515px; height: 69px"></textarea></div>	
 	</div>
 	<div class="row">
-	    <div class="span3" style="text-align:right"><input type="button" class="btn btn-primary" value="Guardar" onclick="javascript:guardar(document.getElementById('accion').value)"></div>
+	    <div class="span3" style="text-align:right"><input type="button" class="btn btn-primary" value="Guardar" onclick="javascript:guardar(document.getElementById('accion').value, document.getElementById('modalidad').value)"></div>
 	</div>
 </div>
 </body>

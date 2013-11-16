@@ -12,7 +12,6 @@ import java.util.HashMap;
  */
 public class AbmObra extends UpdaterManager implements UpdaterInterface{
 
-    @Override
     public void insert(HashMap param) throws Exception {
         try{
             String campos="";
@@ -99,9 +98,70 @@ public class AbmObra extends UpdaterManager implements UpdaterInterface{
     }
 
     @Override
-    public void update(HashMap parameters) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public void update(HashMap param) throws Exception {
+        try{
+        		String where="";
+            String campos="";
+            String datos="";
+            if((String)param.get("poa_alta")!=""){
+                where +=" where poa='"+(String)param.get("poa_alta")+"'";
+            	  campos=" set poa='"+(String)param.get("poa_alta")+"'"; 
+            }
+            if((String)param.get("cuil")!=""){
+                campos+=", cuit_cliente = '"+(String)param.get("cuil")+"'";
+            }
+            if((String)param.get("fecha_inicio")!=""){
+                campos+=", fecha_inicio = '"+(String)param.get("fecha_inicio")+"'";
+            }
+            if((String)param.get("fecha_cierre")!=""){
+                campos+=", fecha_cierre= '"+(String)param.get("fecha_cierre")+"'";
+            }
+            if((String)param.get("fecha_certificacion_presupuestada")!=""){
+                campos+=", fecha_certificacion= '"+(String)param.get("fecha_certificacion_presupuestada")+"'";
+            }
+            if((String)param.get("zona_obra_alta")!=""){
+                campos+=", cod_zona= "+(String)param.get("zona_obra_alta");
+            }
+            if((String)param.get("tipo_obra_alta")!=""){
+                campos+=", cod_tipo_obra= "+(String)param.get("tipo_obra_alta");
+            }
+            if((String)param.get("medicion_estimada_presupuestada")!=""){
+                campos+=", medicion_estimada= "+(String)param.get("medicion_estimada_presupuestada");
+            }
+            if((String)param.get("especificacion_obra")!=""){
+                campos+=", cod_especificacion= "+(String)param.get("especificacion_obra");
+            }
+            if((String)param.get("forma_obra")!=""){
+                campos+=", cod_forma_obra= "+(String)param.get("forma_obra");
+            }
+            if((String)param.get("observacion_presupuestadas")!=""){
+                campos+=", observaciones= '"+(String)param.get("observacion_presupuestadas")+"'";
+            }
+            if((String)param.get("valor_orden_compra_presupuestada")!=""){
+                campos+=", valor_estimado= "+(String)param.get("valor_orden_compra_presupuestada");
+            }
+            if((String)param.get("fecha_pago")!=""){
+                campos+=", fecha_facturacion= '"+(String)param.get("fecha_pago")+"'";
+            }
+            if((String)param.get("nro_orden_compra_presupuestada")!=""){
+                campos+=", orden_compra= "+(String)param.get("nro_orden_compra_presupuestada");
+            }
+            if((String)param.get("valor_orden_compra_presupuestada")!=""){
+                campos+=", valor_orden_compra= "+(String)param.get("valor_orden_compra_presupuestada");
+            }
+            if((String)param.get("nro_recibo_presupuestada")!=""){
+                campos+=", nro_recibo= "+(String)param.get("nro_recibo_presupuestada");
+            }
+            if((String)param.get("estado")!=""){
+                campos+=", estado= '"+(String)param.get("estado")+"'";
+            }
+            String sql_update="update Obra "+campos+ where;
+            System.out.println(sql_update);
+            execute(sql_update);
+        } catch(Exception exc){
+           throw new Exception(exc.getMessage());
+        } 
+     }
     
     
 }

@@ -15,12 +15,12 @@ function filtrar(){
 	goPage(path);
 }
 function alta(){
-	$('.modal-body').load("jsp/obras/seguimiento.jsp?accion=alta");
+	$('.modal-body').load("jsp/obras/seguimiento.jsp?accion=alta&modalidad=A");
 	$('#myModal').modal('show');
 }
 
 function certificar(poa){
-	$('.modal-body').load("jsp/obras/seguimiento.jsp?accion=certificar");
+	$('.modal-body').load("jsp/obras/seguimiento.jsp?accion=certificar&modalidad=A");
 	$('#myModal').modal('show');
 }
 
@@ -30,12 +30,12 @@ function finalizar_cambios(){
 }
 
 function facturar(poa){
-	$('.modal-body').load("jsp/obras/seguimiento.jsp?accion=facturar");
+	$('.modal-body').load("jsp/obras/seguimiento.jsp?accion=facturar&modalidad=A");
 	$('#myModal').modal('show');
 }
 
 function cobrar(poa){
-	$('.modal-body').load("jsp/obras/seguimiento.jsp?accion=cobrar");
+	$('.modal-body').load("jsp/obras/seguimiento.jsp?accion=cobrar&modalidad=A");
 	$('#myModal').modal('show');
 }
 
@@ -85,6 +85,6 @@ function iniciar_ejecucion(poa){
 }
 
 function modi(poa){
-	$('.modal-body').load("jsp/obras/seguimiento.jsp?accion=iniciar&poa="+poa);
+	$('.modal-body').load("jsp/obras/seguimiento.jsp?accion=iniciar&poa="+poa+"&modalidad=M");
 	$('#myModal').modal('show');
 }
