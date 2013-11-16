@@ -23,10 +23,8 @@ public class TagGrillaEmpleados extends TagGrilla {
     private String fecha_desde_baja;
     private String fecha_hasta_baja;
     private String incluir_lista_espera;
-    private String accion="";
     
     public int doStartTag() throws JspException {
-     if(getAccion().equals("")){
        super.doStartTag();
        String table="<thead><tr><th >Nro Legajo</th><th >Empleado</th><th >CUIL</th><th >Fecha Nacimiento</th><th >Fecha Alta</th><th >Fecha Baja</th><th >Situaci&oacute;n</th><th >Categoria</th><th >Acciones</th></tr></thead>";
 			
@@ -95,28 +93,6 @@ public class TagGrillaEmpleados extends TagGrilla {
             throw new JspException(exc.getMessage());
         }
         return SKIP_BODY;
-       }else{// ACA EMPIEZA SI AGREGAREMPLEADO ES TRUE OSEA GENERA UNA TABLA GRILLA QUE MUESTRA LOS EMPLEADOS SEGUN UN POA Y TE PERMITE AGREGAR MAS POR MEDIO DE UNA BOTON
-           try{
-               // ESTO ESTA MAL HECHO, PERO SEGURAMENTE USE ESTA SECCION DPS
-               CollectionEmpleado ce=new CollectionEmpleado();
-               HashMap hm=new HashMap();
-               Vector<Empleado> ve=ce.select(hm);
-               String table="";
-               table+="<tr><td>Diaz</td><td>Nicolas</td>";
-               table+="<td><a href=\"javascript:\" onclick=\"quitarEmpleado(210, this);\">Quitar</a></td>";											
-               table+="</tr>";
-               table+="<tr><td>Diaz</td><td>Juan</td><td>";
-               table+="<a href=\"javascript:\" onclick=\"quitarEmpleado(210, this);\">Quitar</a></td>";											
-               
-                pageContext.getOut().print(table);                          
-           }catch(Exception exc){
-            exc.printStackTrace();
-            throw new JspException(exc.getMessage());
-        }
-        return SKIP_BODY;
-               
-       }
-       
     }
 
     public int doEndTag() throws JspException {
@@ -256,19 +232,6 @@ public class TagGrillaEmpleados extends TagGrilla {
         this.incluir_lista_espera = incluir_lista_espera;
     }
 
-    /**
-     * @return the accion
-     */
-    public String getAccion() {
-        return accion;
-    }
-
-    /**
-     * @param accion the accion to set
-     */
-    public void setAccion(String accion) {
-        this.accion = accion;
-    }
 
 
 }

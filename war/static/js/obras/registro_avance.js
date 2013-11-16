@@ -39,7 +39,6 @@ function ok_add_empleado(){
         }
         
         if(estaEmpleadoAgregado(apellido)){
-            // ESTE NO FUNCIONA
             mensaje+='* El empleado ya esta en la lista \n';
         }
         
@@ -92,7 +91,6 @@ function ok_add_material(){
         }
         
         if(estaMaterialAgregado(mat_nombre)){
-            // ESTE NO FUNCIONA
             mensaje+='* El material ya esta en la lista \n';
         }
         
@@ -109,11 +107,10 @@ function ok_add_material(){
 function estaMaterialAgregado(mat_nombre){
      var esta_agregado=false;
      $("#tabla_material tbody tr").each(function () {
-                     //alert(mat_nombre+"=="+$(this).children("td").eq(0).text());
                      if(mat_nombre == $(this).children("td").eq(0).text()){
                          esta_agregado=true;
                      }  
-     })
+     });
      return esta_agregado;
 }
 
@@ -124,29 +121,47 @@ function cancel_add_material(){
 }
 
 function guardar_registro_avance(accion){
-	$('#myModal').modal('hide');
+        validar_datos();
+        
+	//$('#myModal').modal('hide');
 	if(accion==''){
 		goPage(4002); //en ejecucion	
 	}
 }
 
-/*function agregarEmpleadoObra(poa,legajo_empleado){
-    var parametros={ 
-        accion: 'AE',
-        poa_alta:poa, 
-        legajo_empleado:legajo_empleado,   
-    };
-    $.ajax({
-      type: 'POST',
-      url: 'manager.obra',
-      data: parametros,
-      success: function(response){
-           Notifier.success('\n ' + (parametros.accion=="A"? 'Alta': 'Modificacion') + ' de la obra efectuada con exitoso ');
-   				 finalizar_cambios();	
-      },
-      error: function(response){
-            Notifier.error(response.statusText);	
-      }
-    });
+function validar_datos(){
+    var mensaje='';
+    var txt_poa_ejecucion=$("#txt_poa_ejecucion").val(),          
+        txt_tipo_obra=$("#txt_tipo_obra").val(),
+        txt_zona=$("#txt_zona").val(),
+        txt_fecha_inicio=$("#txt_fecha_inicio").val(),
+        txt_fecha_certificacion=$("#txt_fecha_certificacion").val(),
+        txt_pendiente=$("#txt_pendiente").val(),
+        txt_zanjeo=$("#txt_zanjeo").val(),
+        txt_rotura=$("#txt_rotura").val(),
+        txt_cruce=$("#txt_cruce").val(),
+        txt_pozo_maq=$("#txt_pozo_maq").val(),
+        txt_pozo_rec=$("#txt_pozo_rec").val(),
+        txt_pozo_emp=$("#txt_pozo_emp").val(),
+        txt_pozo_rulo=$("#txt_pozo_rulo").val(),
+        txt_jornal=$("#txt_jornal").val(),
+        txt_observacion=$("#txt_observacion").val();
+        var empleados = new Array();
+        var material= new Array();
+        $("#tabla_empleado tbody tr").each(function () {
+                     empleados.push($(this).attr('id'));
+        });
+        $("#tabla_material tbody tr").each(function () {
+                     material.push($(this).attr('id'));
+        });
+        
+        if(typeof(txt_fecha_inicio)=='undefined'){
+    	txt_fecha_inicio='';
+        }
+        if(typeof(txt_fecha_certificacion)=='undefined'){
+            txt_fecha_certificacion='';
+        }
     
-}*/
+    
+}
+
