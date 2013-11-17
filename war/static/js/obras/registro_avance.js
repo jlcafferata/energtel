@@ -114,6 +114,9 @@ function estaMaterialAgregado(mat_nombre){
      return esta_agregado;
 }
 
+function quitarMaterial(leg){
+    $(leg).remove();
+}
 
 function cancel_add_material(){
 	$("#div_button_add_material").show();
