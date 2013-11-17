@@ -14,17 +14,22 @@ public class CollectionMaterial extends AccessManager implements AccessInterface
        public Vector select(HashMap param) throws Exception{
         Vector vec= new Vector();
         try{
-        		String sql="SELECT * from material where cod_material as codigo is not null ";
-        		
-		     		
-        		System.out.println("CONSULTA A EJECUTAR: " + sql);
+            String sql="SELECT * from Material where cod_material is not null";
+            if(param!=null){
+                    if(param.get("cod_material")!=null && !param.get("cod_material").equals("")){
+                            sql+=" and cod_material=" + (String)param.get("cod_material");
+                    }
+            }
+
+            System.out.println("CONSULTA A EJECUTAR: " + sql);
             ResultSet rst = execute(sql);   
             System.out.println("EJECUTO CONSULTA");
             while(rst.next()){
-               // System.out.println("EN EL WHILE");
+               // System.out.println("EN EL WHILE");  
                 Material value=new Material();
-                value.setCodigo(rst.getString("codigo"));
+                value.setCodigo(rst.getString("cod_material"));
                 value.setDescripcion(rst.getString("descripcion"));
+                value.setStock(rst.getString("stock"));
                 vec.add(value);
             }             
         }catch(Exception exc){

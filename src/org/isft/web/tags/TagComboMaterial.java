@@ -24,7 +24,7 @@ public class TagComboMaterial extends TagCombo {
                 if(value.getCodigo().equals(getSelecto())){
                     selected="selected";
                }
-                pageContext.getOut().print("<option "+selected+" value=\""+value.getCodigo()+"\">"+value.getDescripcion()+"</option>\n");
+                pageContext.getOut().print("<option "+selected+" value=\""+value.getCodigo()+"-"+value.getStock()+"\">"+value.getDescripcion()+"</option>\n");
             }
  		} catch(Exception exc){
             exc.printStackTrace();
