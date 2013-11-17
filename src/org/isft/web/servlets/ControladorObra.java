@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.isft.logic.updater.AbmEmpleado;
 import java.util.HashMap;
 import java.util.Iterator;
+import org.isft.domain.helper.FechaHora;
 import org.isft.logic.updater.AbmObra;
 
 
@@ -52,6 +53,9 @@ public class ControladorObra  extends HttpServlet {
                 String txt_jornal = request.getParameter("txt_jornal");
                 String txt_observacion = request.getParameter("txt_observacion");
                 
+                System.out.println("Empleados request: "+ request.getParameter("empleados"));
+                System.out.println("Empleados variable: "+ empleados);
+                
                 if(accion==null){accion="";}                  
                 if(poa_alta==null){poa_alta="";}                  
                 if(cuil==null){cuil="";}                  
@@ -85,6 +89,10 @@ public class ControladorObra  extends HttpServlet {
                 
                 HashMap param=new HashMap();
                 
+                FechaHora fa=new FechaHora();
+                String fecha_actual=fa.getFecha()+" "+fa.getHora();
+                String hora_carga=fa.getHora();
+                
  		param.put("accion",accion);
                 param.put("poa_alta",poa_alta);
                 param.put("cuil",cuil);
@@ -116,7 +124,9 @@ public class ControladorObra  extends HttpServlet {
                 param.put("pozo_rulo",txt_pozo_rulo);
                 param.put("jornal",txt_jornal);
                 param.put("observacion",txt_observacion);
-               
+                param.put("fecha_actual",fecha_actual);
+                param.put("hora_carga",hora_carga);
+                
         AbmObra abm=new AbmObra();
         
 	try{
