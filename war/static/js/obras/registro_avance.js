@@ -38,7 +38,7 @@ function ok_add_empleado(){
             mensaje+='* Debe seleccionar un empleado \n';
         }
         
-        if(estaEmpleadoAgregado(apellido)){
+        if(estaEmpleadoAgregado(legajo)){
             mensaje+='* El empleado ya esta en la lista \n';
         }
         
@@ -53,10 +53,10 @@ function ok_add_empleado(){
 	$("#div_empleados").hide("slow");
 }
 
-function estaEmpleadoAgregado(apellido){
+function estaEmpleadoAgregado(legajo){
      var esta_agregado=false;
-     $("#tabla_empleado tbody tr").each(function () {
-                     if(apellido == $(this).children("td").eq(0).text()){
+     $("#tabla_empleado tbody tr").each(function () {   
+                     if(legajo == $(this).attr('id')){
                          esta_agregado=true;
                      }  
      })
@@ -124,19 +124,47 @@ function cancel_add_material(){
 }
 
 function guardar_registro_avance(accion){
-        validar_datos();
-        
-	//$('#myModal').modal('hide');
-	if(accion==''){
-		goPage(4002); //en ejecucion	
-	}
+        if(validar_datos()){
+            var empleados = new Array();
+            var materiales= new Array();
+            $("#tabla_empleado tbody tr").each(function () {
+                         empleados.push($(this).attr('id'));
+            });
+            $("#tabla_material tbody tr").each(function () {
+                         materiales.push($(this).attr('id'));
+            });
+            var parametros={
+                accion: 'IE',
+                poa_alta:                       $("#txt_poa_ejecucion").val(),   
+                tipo_obra_alta:                 $("#cbo_tipo_obra_aejecucion").val(), 
+                zona_obra_alta:                 $("#cbo_zona_obra_aejecucion").val(), 
+                fecha_certificacion_avance:     $("#txt_fecha_certificacion").val(), 
+                empleados:                      empleados,
+                materiales:                     materiales,
+                txt_pendiente:                  $("#txt_pendiente").val(),
+                txt_zanjeo:                     $("#txt_zanjeo").val(),
+                txt_rotura:                     $("#txt_rotura").val(),
+                txt_cruce:                      $("#txt_cruce").val(),
+                txt_pozo_maq:                   $("#txt_pozo_maq").val(),
+                txt_pozo_rec:                   $("#txt_pozo_rec").val(),
+                txt_pozo_emp:                   $("#txt_pozo_emp").val(),
+                txt_pozo_rulo:                  $("#txt_pozo_rulo").val(),
+                txt_jornal:                     $("#txt_jornal").val(),
+                txt_observacion:                $("#txt_observacion").val(),
+                estado:				"eje",
+            };
+            console.log(parametros);
+            pasarEjecucion(parametros);
+            $('#myModal').modal('hide');
+                
+        }
 }
 
 function validar_datos(){
     var mensaje='';
     var txt_poa_ejecucion=$("#txt_poa_ejecucion").val(),          
-        txt_tipo_obra=$("#txt_tipo_obra").val(),
-        txt_zona=$("#txt_zona").val(),
+        cbo_tipo_obra_aejecucion=$("#cbo_tipo_obra_aejecucion").val(),
+        cbo_zona_obra_aejecucion=$("#cbo_zona_obra_aejecucion").val(),
         txt_fecha_inicio=$("#txt_fecha_inicio").val(),
         txt_fecha_certificacion=$("#txt_fecha_certificacion").val(),
         txt_pendiente=$("#txt_pendiente").val(),
@@ -150,21 +178,60 @@ function validar_datos(){
         txt_jornal=$("#txt_jornal").val(),
         txt_observacion=$("#txt_observacion").val();
         var empleados = new Array();
-        var material= new Array();
+        var materiales= new Array();
         $("#tabla_empleado tbody tr").each(function () {
                      empleados.push($(this).attr('id'));
         });
         $("#tabla_material tbody tr").each(function () {
-                     material.push($(this).attr('id'));
+                     materiales.push($(this).attr('id'));
         });
         
-        if(typeof(txt_fecha_inicio)=='undefined'){
-    	txt_fecha_inicio='';
+        if(typeof(txt_fecha_inicio)=='undefined'){txt_fecha_inicio='';}
+        if(typeof(txt_fecha_certificacion)=='undefined'){txt_fecha_certificacion='';}
+        
+        // RELACION ENTRE FECHA DE CERTIFICACION,EMPLEADOS Y TAREAS 
+        var tareas=txt_zanjeo+txt_rotura+txt_cruce+txt_pozo_maq+txt_pozo_rec+txt_pozo_emp+txt_pozo_rulo+txt_jornal;
+            if(txt_fecha_certificacion!='' ){
+                if(tareas!=''){
+                    if(empleados.length <1){
+                        mensaje+='* Debe elejir agregar por lo menos un empleado que participo \n';
+                    }
+                }else{
+                    mensaje+='* Debe elejir por lo menos una tarea \n';
+                }
+            }else if(tareas!=''){
+                mensaje+='* Debe elejir una fecha de certificacion \n';
+                  }else if(!empleados.length <1){
+                      mensaje+='* Debe elejir por lo menos una tarea y fecha de certificacion \n';
+                  }          
+                  
+                  
+        // QUE NO ESTE MATERIALES ELEJIDO SOLO          
+        if(!materiales.length <1 && (empleados.length <1 || tareas =='' || txt_fecha_certificacion=='')){
+            mensaje='* Debe elejir por lo menos una tarea,fecha de certificacion y empleado que participo \n';
+        }     
+        // ENVIO DE ERRORES      
+        if(mensaje!=''){
+            alert(mensaje);
+            return false;
+        }else{
+            return true;
         }
-        if(typeof(txt_fecha_certificacion)=='undefined'){
-            txt_fecha_certificacion='';
-        }
-    
-    
 }
 
+
+function pasarEjecucion(parametros){
+    console.log(parametros);
+    $.ajax({
+      type: 'POST',
+      url: 'manager.obra',
+      data: parametros,
+      success: function(response){
+           Notifier.success('Pasaje a ejecucion realizado');
+           goPage(4002);
+      },
+      error: function(response){
+            Notifier.error(response.statusText);	
+      } 
+    });
+}

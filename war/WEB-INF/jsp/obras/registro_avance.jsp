@@ -24,15 +24,15 @@ if(accion==null){
 		<div class="span3" style="text-align:right">POA/OT</div>
 		<div class="span3"><input name="txt_poa" id="txt_poa_ejecucion" style="width:80px" type="text" value="<%=poa%>" disabled/></div>
 		<div class="span3" style="text-align:right">Tipo obra</div>
-		<div class="span3"><input name="txt_tipo_obra" id="txt_tipo_obra" style="width:150px" type="text" /></div>
+		<div class="span3"><tag:ComboTipoObra nombreCombo="cbo_tipo_obra_aejecucion"/></div>
 	</div>
 	<div class="row">
-		<div class="span2" style="text-align:right">Zona</div>
-		<div class="span2"><input name="txt_zona" id="txt_zona" type="text" /></div>
-		<div class="span2" style="text-align:right">Fecha inicio</div>
-		<div class="span2"><input type="text" id="txt_fecha_inicio" style="width:120px"/></div>
-		<div class="span2" style="text-align:right">Fecha certificacion</div>
-		<div class="span2"><input type="text" id="txt_fecha_certificacion" style="width:120px"/></div>
+		<div class="span3" style="text-align:right">Zona</div>
+		<div class="span3"><tag:ComboZona nombreCombo="cbo_zona_obra_aejecucion"/></div>
+		<div class="span1" style="display: none;">Fecha inicio</div>
+		<div class="span2" style="display: none;"><input type="text" id="txt_fecha_inicio" style="width:120px"/></div>
+		<div class="span3" style="text-align:right">Fecha certificacion</div>
+		<div class="span3"><input type="text" id="txt_fecha_certificacion" style="width:120px"/></div>
 	</div>
 	<table width="100%">
 		<tr>

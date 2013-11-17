@@ -100,7 +100,7 @@ public class AbmObra extends UpdaterManager implements UpdaterInterface{
     @Override
     public void update(HashMap param) throws Exception {
         try{
-        		String where="";
+            String where="";
             String campos="";
             String datos="";
             if((String)param.get("poa_alta")!=""){
@@ -162,6 +162,28 @@ public class AbmObra extends UpdaterManager implements UpdaterInterface{
            throw new Exception(exc.getMessage());
         } 
      }
+
+    public void iniciarEjecucion(HashMap param) throws Exception {
+        try{
+            String sql_update="UPDATE OBRA SET";
+            String cambios="";
+            cambios+=" estado= '"+(String)param.get("estado")+"'";
+            if((String)param.get("zona_obra_alta")!=""){
+                cambios+=", cod_zona= "+(String)param.get("zona_obra_alta");
+            }
+            if((String)param.get("tipo_obra_alta")!=""){
+                cambios+=", cod_tipo_obra= "+(String)param.get("tipo_obra_alta");
+            }
+            sql_update+=cambios;
+            sql_update+=" where poa='"+(String)param.get("poa_alta")+"'";
+            System.out.println("Cadena de update: " + sql_update);
+            execute(sql_update);
+            
+        } catch(Exception exc){
+           throw new Exception(exc.getMessage());
+        }
+
+    }
     
     
 }
