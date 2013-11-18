@@ -173,7 +173,7 @@ function confirmar_modificacion(estado){
         nro_orden_compra_presupuestada: $("#txt_nro_orden_compra_presupuestada").val(),     
         valor_orden_compra_presupuestada: $("#txt_valor_orden_compra_presupuestada").val(), 
         observacion_presupuestadas:     $("#txt_observacion_presupuestadas").val(),
-        estado:													estado  
+        estado:                         estado  
     };
     console.log(parametros);
     grabar(parametros);
