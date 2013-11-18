@@ -65,9 +65,11 @@ if(accion==null){
 							<table class="table table-hover table-bordered table-condensed" width="100%" id="tabla_material">
 								<thead>
 									<tr>
-										<th >Material</th>
-                                                                                <th> Cantidad</th>
-										<th > Stock</th>
+										<th> Material</th>
+                                                                                <th> Cantidad </th>
+										<th> Stock propio </th>
+                                                                                <th> Cantidad </th>
+                                                                                <th> Stock Provisto</th>
 										<th> 
                                                                                     <div id="div_button_add_material">
                                                                                         <input class="btn  btn-primary"   type="button" name="btn_agregar_material" value="+" style="height:20px" onclick="javascript:ver_materiales()"/>

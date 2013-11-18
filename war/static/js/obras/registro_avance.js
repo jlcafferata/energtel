@@ -130,7 +130,8 @@ function ok_add_material(){
         var mensaje='';
         var cbo_materiales=$("#cbo_materiales").val();
         var value_cbo_materiales=$('#cbo_materiales').val().split('-');
-        var stock=value_cbo_materiales[1];
+        var stock_propio=value_cbo_materiales[1];
+        var stock_provisto=value_cbo_materiales[2];
         var cod_material='mat_cod_'+value_cbo_materiales[0];
         var mat_nombre=$('#cbo_materiales :selected').text();
             
@@ -146,7 +147,7 @@ function ok_add_material(){
             alert(mensaje);
             return false;
         } else{
-            $('#tabla_material > tbody:last').append("<tr id='"+cod_material+"'><td>"+mat_nombre+"</td><td><input name='txt_"+cod_material+"' id='txt_"+cod_material+"' style='width:70px' type='text'></td><td>"+stock+"</td><td><a href=\"javascript:\" onclick=\"quitarMaterial("+cod_material+");\">Quitar</a></td></tr>");
+            $('#tabla_material > tbody:last').append("<tr id='"+cod_material+"'><td>"+mat_nombre+"</td><td><input name='txt1_"+cod_material+"' id='txtpropio_"+cod_material+"' style='width:70px' type='text'><td>"+stock_propio+"</td></td><td><input name='txtprovisto_"+cod_material+"' id='txtprovisto_"+cod_material+"' style='width:70px' type='text'><td>"+stock_provisto+"</td></td><td><a href=\"javascript:\" onclick=\"quitarMaterial("+cod_material+");\">Quitar</a></td></tr>");
         }
 	$("#div_button_add_material").show();
 	$("#div_materiales").hide("slow");
@@ -187,20 +188,33 @@ function guardar_registro_avance(accion){
                          if(materiales!=''){
                              materiales+='@';
                          }
-                         var aux="txt_"+$(this).attr('id')
-                         var cant=$("#"+aux).val();
+                         // TOMA LOS VALORES DE STOCK PROPIO
+                         var aux_stock_propio="txtpropio_"+$(this).attr('id');
+                         var cant_stock_propio_usado=$("#"+aux_stock_propio).val();
+                         var stock_propio=$(this).children("td").eq(2).text();
+                         if(stock_propio=='' || stock_propio=='undefined'){stock_propio="0";}
+                         if(cant_stock_propio_usado=='' || cant_stock_propio_usado=='undefined'){cant_stock_propio_usado="0";}
+                         // TOMA LOS VALORES DE STOCK PROVISTO
+                         var aux_stock_provisto="txtprovisto_"+$(this).attr('id');
+                         var cant_stock_provisto_usado=$("#"+aux_stock_provisto).val();
+                         var stock_provisto=$(this).children("td").eq(4).text();
+                         if(stock_provisto=='' || stock_provisto=='undefined'){stock_provisto="0";}
+                         if(cant_stock_provisto_usado=='' || cant_stock_provisto_usado=='undefined'){cant_stock_provisto_usado="0";}
+                         //CAPTURA LA ID DEL MATERIAL
                          var id=$(this).attr('id').split('_');
-                         var stock=$(this).children("td").eq(2).text();
-                         if(stock=='' || stock=='undefined'){cant="nada";}
-                         if(cant=='' || cant=='undefined'){cant="0";}
-                         materiales+=id[2]+"-"+cant+"-"+stock;
+                         // GENERA EL STRING DE UN MATERIAL
+                         materiales+=id[2]+"-"+cant_stock_propio_usado+"-"+stock_propio+"-"+cant_stock_provisto_usado+"-"+stock_provisto;
             });      
             $("#tabla_tareas tbody tr").each(function () {
                          if(tareas!=''){
                              tareas+='@';
                          }
+                         // TOMA LOS VALORES DE STOCK PROPIO
+                         var aux_tarea="txt_"+$(this).children("td").eq(0).text();
+                         var cant_tarea_realizada=$("#"+aux_tarea).val();
+                         if(cant_tarea_realizada=='' || cant_tarea_realizada=='undefined'){cant_tarea_realizada="0";}
                          var id_tarea=$(this).attr('id').split('_');
-                         tareas+=id_tarea[1];
+                         tareas+=id_tarea[1]+"-"+cant_tarea_realizada;
             }); 
             
             var parametros={

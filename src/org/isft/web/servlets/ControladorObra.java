@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import org.isft.domain.helper.FechaHora;
 import org.isft.logic.updater.AbmObra;
+import org.isft.logic.validator.ChequearDatosObra;
 
 
 public class ControladorObra  extends HttpServlet {
@@ -127,11 +128,22 @@ public class ControladorObra  extends HttpServlet {
                 param.put("hora_carga",hora_carga);
                 param.put("tareas",tareas);
                 
+                response.setContentType("html/text");
+                ChequearDatosObra cdo=new ChequearDatosObra();
+                
+                
         AbmObra abm=new AbmObra();
         
 	try{
             if(accion.equals("A")){
-                    abm.insert(param);
+                    String validos=cdo.esValidoParaAltaPoa((String)param.get("poa_alta"));
+                    if(validos.equals("")){
+                        abm.insert(param);
+                    }else{
+                        response.getWriter().write("ERROR:"+validos);
+                        return;
+                    }
+                    
             } else if(accion.equals("IE")){
                     abm.iniciarEjecucion(param);
             } else {

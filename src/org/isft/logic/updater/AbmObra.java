@@ -267,12 +267,17 @@ public class AbmObra extends UpdaterManager implements UpdaterInterface{
                         campos_avance_materiales+=", cantidad";
                         datos_avance_materiales+=", "+material[1]+"";
                     }
-                    if(material[2]!="nada"){
-                        int cant_usada=Integer.parseInt(material[1]);
-                        int stock_previo=Integer.parseInt(material[2]);
-                        int nuevo_stock=stock_previo-cant_usada;
-                        String sql_reducir_stock="UPDATE Material SET stock_propio="+nuevo_stock+" where cod_material="+material[0]+"";
+                    if(material[1]!="0" || material[3]!="0"){
+                        int cant_usada_propio=Integer.parseInt(material[1]);
+                        int stock_previo_propio=Integer.parseInt(material[2]);
+                        int nuevo_stock_propio=stock_previo_propio-cant_usada_propio;
+                        int cant_usada_provisto=Integer.parseInt(material[3]);
+                        int stock_previo_provisto=Integer.parseInt(material[4]);
+                        int nuevo_stock_provisto=stock_previo_provisto-cant_usada_provisto;  
+                        String sql_reducir_stock="UPDATE Material SET stock_propio="+nuevo_stock_propio+", stock_provisto="+nuevo_stock_provisto+" where cod_material="+material[0]+"";
+                        System.out.println("Cadena de reduccion de stock: "+ sql_reducir_stock);
                         execute(sql_reducir_stock);
+                        System.out.println("Se ejecuto la cadena de reduccion de stock");
                     }
                     
                     String sql_avance_materiales_obra="insert into Material_avance_obra ("+campos_avance_materiales+") values ("+datos_avance_materiales+")";
@@ -287,8 +292,9 @@ public class AbmObra extends UpdaterManager implements UpdaterInterface{
                 String[] tareas=aux.split("@");
                 for(int i=0;i<tareas.length;i++){
                     String campos_avance_tareas="",datos_avance_tareas="";
-                    campos_avance_tareas+="cod_tarea";                    
-                    datos_avance_tareas+=tareas[i];
+                    String[] datos_tarea=tareas[i].split("-");            // SPLIT PARA TOMAR 0=COD_TAREA, 1=CANTIDAD TAREA
+                    campos_avance_tareas+="cod_tarea";                    // CAMPO COD_TAREA
+                    datos_avance_tareas+=datos_tarea[0];                  // VALOR COD_TAREA
                     if((String)param.get("poa_alta")!=""){
                         campos_avance_tareas+=", poa";
                         datos_avance_tareas+=", "+(String)param.get("poa_alta"); 
@@ -300,6 +306,10 @@ public class AbmObra extends UpdaterManager implements UpdaterInterface{
                     if((String)param.get("hora_carga")!=""){
                         campos_avance_tareas+=", hora_carga";
                         datos_avance_tareas+=", '"+(String)param.get("hora_carga")+"'";
+                    }
+                    if(datos_tarea[1]!="0"){
+                        campos_avance_tareas+=", valor";
+                        datos_avance_tareas+=", "+datos_tarea[1]+"";
                     }
                     String sql_avance_tareas_obra="insert into Tarea_avance_obra ("+campos_avance_tareas+") values ("+datos_avance_tareas+")";
                     System.out.println("Cadena de tareas insertada en avance materiales: " + sql_avance_tareas_obra);
