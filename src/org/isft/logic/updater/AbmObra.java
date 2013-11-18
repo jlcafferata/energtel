@@ -178,6 +178,9 @@ public class AbmObra extends UpdaterManager implements UpdaterInterface{
             if((String)param.get("fecha_actual")!=""){
                 cambios+=", fecha_inicio= '"+(String)param.get("fecha_actual")+"'";
             }
+            if((String)param.get("observacion")!=""){
+                cambios+=", observaciones= '"+(String)param.get("observacion")+"'";
+            }
             sql_update+=cambios;
             sql_update+=" where poa='"+(String)param.get("poa_alta")+"'";
             
@@ -239,14 +242,15 @@ public class AbmObra extends UpdaterManager implements UpdaterInterface{
                 }
             }
             
-            //AGREGAR MATERIALES AVANCE OBRA
+            //AGREGAR MATERIALES AVANCE OBRA Y DESCONTAR STOCK SI ES NECESARIO
             if((String)param.get("materiales")!=""){
                 String aux=(String)param.get("materiales");
                 String[] materiales=aux.split("@");
                 for(int i=0;i<materiales.length;i++){
+                    String[] material=materiales[i].split("-");
                     String campos_avance_materiales="",datos_avance_materiales="";
                     campos_avance_materiales+="cod_material";                    
-                    datos_avance_materiales+=materiales[i];
+                    datos_avance_materiales+=material[0];
                     if((String)param.get("poa_alta")!=""){
                         campos_avance_materiales+=", poa";
                         datos_avance_materiales+=", "+(String)param.get("poa_alta"); 
@@ -259,9 +263,47 @@ public class AbmObra extends UpdaterManager implements UpdaterInterface{
                         campos_avance_materiales+=", hora_carga";
                         datos_avance_materiales+=", '"+(String)param.get("hora_carga")+"'";
                     }
+                    if(material[1]!="0"){
+                        campos_avance_materiales+=", cantidad";
+                        datos_avance_materiales+=", "+material[1]+"";
+                    }
+                    if(material[2]!="nada"){
+                        int cant_usada=Integer.parseInt(material[1]);
+                        int stock_previo=Integer.parseInt(material[2]);
+                        int nuevo_stock=stock_previo-cant_usada;
+                        String sql_reducir_stock="UPDATE Material SET stock_propio="+nuevo_stock+" where cod_material="+material[0]+"";
+                        execute(sql_reducir_stock);
+                    }
+                    
                     String sql_avance_materiales_obra="insert into Material_avance_obra ("+campos_avance_materiales+") values ("+datos_avance_materiales+")";
                     System.out.println("Cadena de materiales insertada en avance materiales: " + sql_avance_materiales_obra);
                     execute(sql_avance_materiales_obra);
+                }
+            }
+            
+            //AGREGAR TAREAS AVANCE OBRA
+            if((String)param.get("tareas")!=""){
+                String aux=(String)param.get("tareas");
+                String[] tareas=aux.split("@");
+                for(int i=0;i<tareas.length;i++){
+                    String campos_avance_tareas="",datos_avance_tareas="";
+                    campos_avance_tareas+="cod_tarea";                    
+                    datos_avance_tareas+=tareas[i];
+                    if((String)param.get("poa_alta")!=""){
+                        campos_avance_tareas+=", poa";
+                        datos_avance_tareas+=", "+(String)param.get("poa_alta"); 
+                    }
+                    if((String)param.get("fecha_certificacion_avance")!=""){
+                        campos_avance_tareas+=", fecha_certificacion";
+                        datos_avance_tareas+=", '"+(String)param.get("fecha_certificacion_avance")+"'";
+                    }
+                    if((String)param.get("hora_carga")!=""){
+                        campos_avance_tareas+=", hora_carga";
+                        datos_avance_tareas+=", '"+(String)param.get("hora_carga")+"'";
+                    }
+                    String sql_avance_tareas_obra="insert into Tarea_avance_obra ("+campos_avance_tareas+") values ("+datos_avance_tareas+")";
+                    System.out.println("Cadena de tareas insertada en avance materiales: " + sql_avance_tareas_obra);
+                    execute(sql_avance_tareas_obra);
                 }
             }
             
