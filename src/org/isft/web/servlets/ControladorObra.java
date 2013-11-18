@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.isft.logic.updater.AbmEmpleado;
 import java.util.HashMap;
 import java.util.Iterator;
+import org.isft.domain.helper.FechaHora;
 import org.isft.logic.updater.AbmObra;
 
 
@@ -38,6 +39,22 @@ public class ControladorObra  extends HttpServlet {
                 String observacion_presupuestadas = request.getParameter("observacion_presupuestadas");
                 String legajo_empleado = request.getParameter("legajo_empleado");
                 String estado = request.getParameter("estado");
+                String fecha_certificacion_avance = request.getParameter("fecha_certificacion_avance");
+                String empleados = request.getParameter("empleados");
+                String materiales = request.getParameter("materiales");
+                String txt_pendiente = request.getParameter("txt_pendiente");
+                String txt_zanjeo = request.getParameter("txt_zanjeo");
+                String txt_rotura = request.getParameter("txt_rotura");
+                String txt_cruce = request.getParameter("txt_cruce");
+                String txt_pozo_maq = request.getParameter("txt_pozo_maq");
+                String txt_pozo_rec = request.getParameter("txt_pozo_rec");
+                String txt_pozo_emp = request.getParameter("txt_pozo_emp");
+                String txt_pozo_rulo = request.getParameter("txt_pozo_rulo");
+                String txt_jornal = request.getParameter("txt_jornal");
+                String txt_observacion = request.getParameter("txt_observacion");
+                
+                System.out.println("Empleados request: "+ request.getParameter("empleados"));
+                System.out.println("Empleados variable: "+ empleados);
                 
                 if(accion==null){accion="";}                  
                 if(poa_alta==null){poa_alta="";}                  
@@ -56,8 +73,25 @@ public class ControladorObra  extends HttpServlet {
                 if(valor_orden_compra_presupuestada==null){valor_orden_compra_presupuestada="";}                  
                 if(observacion_presupuestadas==null){observacion_presupuestadas="";}                                   
                 if(legajo_empleado==null){legajo_empleado="";}                                   
-                               
+                if(fecha_certificacion_avance==null){fecha_certificacion_avance="";}
+                if(empleados==null){empleados="";}
+                if(materiales==null){materiales="";}
+                if(txt_pendiente==null){txt_pendiente="";}
+                if(txt_zanjeo==null){txt_zanjeo="";}
+                if(txt_rotura==null){txt_rotura="";}
+                if(txt_cruce==null){txt_cruce="";}
+                if(txt_pozo_maq==null){txt_pozo_maq="";}
+                if(txt_pozo_rec==null){txt_pozo_rec="";}
+                if(txt_pozo_emp==null){txt_pozo_emp="";}
+                if(txt_pozo_rulo==null){txt_pozo_rulo="";}
+                if(txt_jornal==null){txt_jornal="";}
+                if(txt_observacion==null){txt_observacion="";}
+                
                 HashMap param=new HashMap();
+                
+                FechaHora fa=new FechaHora();
+                String fecha_actual=fa.getFecha()+" "+fa.getHora();
+                String hora_carga=fa.getHora();
                 
  		param.put("accion",accion);
                 param.put("poa_alta",poa_alta);
@@ -77,14 +111,29 @@ public class ControladorObra  extends HttpServlet {
                 param.put("observacion_presupuestadas",observacion_presupuestadas);
                 param.put("estado",estado);
                 param.put("legajo_empleado","legajo_empleado");
-               
+                param.put("fecha_certificacion_avance",fecha_certificacion_avance);
+                param.put("empleados",empleados);
+                param.put("materiales",materiales);
+                param.put("pendiente",txt_pendiente);
+                param.put("zanjeo",txt_zanjeo);
+                param.put("rotura",txt_rotura);
+                param.put("cruce",txt_cruce);
+                param.put("pozo_maq",txt_pozo_maq);
+                param.put("pozo_rec",txt_pozo_rec);
+                param.put("pozo_emp",txt_pozo_emp);
+                param.put("pozo_rulo",txt_pozo_rulo);
+                param.put("jornal",txt_jornal);
+                param.put("observacion",txt_observacion);
+                param.put("fecha_actual",fecha_actual);
+                param.put("hora_carga",hora_carga);
+                
         AbmObra abm=new AbmObra();
         
 	try{
             if(accion.equals("A")){
                     abm.insert(param);
-            } else if(accion.equals("B")){
-                    abm.delete(param);
+            } else if(accion.equals("IE")){
+                    abm.iniciarEjecucion(param);
             } else {
                     abm.update(param);
             }

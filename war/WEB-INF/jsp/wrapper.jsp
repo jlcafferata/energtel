@@ -26,9 +26,9 @@
 <% if(request.getSession(false).getAttribute("usr")!=null){ %>
     <script>
 	$(document).ready(function(){
-		$('.modal-body-message').load("jsp/display/ayuda_memoria.jsp");
+		/*$('.modal-body-message').load("jsp/display/ayuda_memoria.jsp");
 		$('#myMessage').modal('show');
-		});
+		*/});
 </script>
 <%}%>
 </html>
