@@ -78,11 +78,60 @@ function ver_materiales(){
 	$("#div_materiales").show();
 }
 
+function cancel_add_tarea(){
+	$("#div_button_add_tarea").show();
+	$("#div_tarea").hide("slow");      
+}
+
+function ver_tarea(){
+	$("#div_button_add_tarea").hide("slow");
+	$("#div_tarea").show();
+}
+
+function ok_add_tarea(){
+    var mensaje='';
+        var cod_tarea=$("#cbo_tarea").val();
+        var tarea_nombre=$('#cbo_tarea :selected').text();
+        var tarea_descripcion=$('#cbo_tarea :selected').attr('name');
+        
+        if(tarea_nombre==''){
+            mensaje+='* Debe seleccionar una tarea \n';
+        }
+        
+        if(estaTareaAgregada(tarea_nombre)){
+            mensaje+='* El material ya esta en la lista \n';
+        }
+        
+        if(mensaje!=''){
+            alert(mensaje);
+            return false;
+        } else{
+            $('#tabla_tareas > tbody:last').append("<tr id='tarea_"+cod_tarea+"'><td>"+tarea_nombre+"</td><td><input name='txt_"+tarea_nombre+"' id='txt_"+tarea_nombre+"' style='width:70px' type='text'></td><td><a href=\"javascript:\" onclick=\"quitarTarea(tarea_"+cod_tarea+");\">Quitar</a></td></tr>");
+        }
+	$("#div_button_add_tarea").show();
+	$("#div_tarea").hide("slow");
+}
+
+function quitarTarea(cod_tarea){
+    $(cod_tarea).remove();
+}
+
+function estaTareaAgregada(tarea){
+    var esta_agregado=false;
+     $("#tabla_tareas tbody tr").each(function () {
+                     if(tarea == $(this).children("td").eq(0).text()){
+                         esta_agregado=true;
+                     }  
+     });
+     return esta_agregado;
+}
+
 function ok_add_material(){
         var mensaje='';
         var cbo_materiales=$("#cbo_materiales").val();
         var value_cbo_materiales=$('#cbo_materiales').val().split('-');
-        var stock=value_cbo_materiales[1];
+        var stock_propio=value_cbo_materiales[1];
+        var stock_provisto=value_cbo_materiales[2];
         var cod_material='mat_cod_'+value_cbo_materiales[0];
         var mat_nombre=$('#cbo_materiales :selected').text();
             
@@ -98,7 +147,7 @@ function ok_add_material(){
             alert(mensaje);
             return false;
         } else{
-            $('#tabla_material > tbody:last').append("<tr id='"+cod_material+"'><td>"+mat_nombre+"</td><td><input name='txt_"+mat_nombre+"' id='txt_"+mat_nombre+"' style='width:70px' type='text'></td><td>"+stock+"</td><td><a href=\"javascript:\" onclick=\"quitarMaterial("+cod_material+");\">Quitar</a></td></tr>");
+            $('#tabla_material > tbody:last').append("<tr id='"+cod_material+"'><td>"+mat_nombre+"</td><td><input name='txt1_"+cod_material+"' id='txtpropio_"+cod_material+"' style='width:70px' type='text'><td>"+stock_propio+"</td></td><td><input name='txtprovisto_"+cod_material+"' id='txtprovisto_"+cod_material+"' style='width:70px' type='text'><td>"+stock_provisto+"</td></td><td><a href=\"javascript:\" onclick=\"quitarMaterial("+cod_material+");\">Quitar</a></td></tr>");
         }
 	$("#div_button_add_material").show();
 	$("#div_materiales").hide("slow");
@@ -126,7 +175,8 @@ function cancel_add_material(){
 function guardar_registro_avance(accion){
         if(validar_datos()){
             var empleados ='';
-            var materiales= new Array();
+            var materiales='';
+            var tareas='';
             $("#tabla_empleado tbody tr").each(function () {
                          if(empleados!=''){
                              empleados+='@';
@@ -138,9 +188,34 @@ function guardar_registro_avance(accion){
                          if(materiales!=''){
                              materiales+='@';
                          }
+                         // TOMA LOS VALORES DE STOCK PROPIO
+                         var aux_stock_propio="txtpropio_"+$(this).attr('id');
+                         var cant_stock_propio_usado=$("#"+aux_stock_propio).val();
+                         var stock_propio=$(this).children("td").eq(2).text();
+                         if(stock_propio=='' || stock_propio=='undefined'){stock_propio="0";}
+                         if(cant_stock_propio_usado=='' || cant_stock_propio_usado=='undefined'){cant_stock_propio_usado="0";}
+                         // TOMA LOS VALORES DE STOCK PROVISTO
+                         var aux_stock_provisto="txtprovisto_"+$(this).attr('id');
+                         var cant_stock_provisto_usado=$("#"+aux_stock_provisto).val();
+                         var stock_provisto=$(this).children("td").eq(4).text();
+                         if(stock_provisto=='' || stock_provisto=='undefined'){stock_provisto="0";}
+                         if(cant_stock_provisto_usado=='' || cant_stock_provisto_usado=='undefined'){cant_stock_provisto_usado="0";}
+                         //CAPTURA LA ID DEL MATERIAL
                          var id=$(this).attr('id').split('_');
-                         materiales+=id[2];
-            });            
+                         // GENERA EL STRING DE UN MATERIAL
+                         materiales+=id[2]+"-"+cant_stock_propio_usado+"-"+stock_propio+"-"+cant_stock_provisto_usado+"-"+stock_provisto;
+            });      
+            $("#tabla_tareas tbody tr").each(function () {
+                         if(tareas!=''){
+                             tareas+='@';
+                         }
+                         // TOMA LOS VALORES DE STOCK PROPIO
+                         var aux_tarea="txt_"+$(this).children("td").eq(0).text();
+                         var cant_tarea_realizada=$("#"+aux_tarea).val();
+                         if(cant_tarea_realizada=='' || cant_tarea_realizada=='undefined'){cant_tarea_realizada="0";}
+                         var id_tarea=$(this).attr('id').split('_');
+                         tareas+=id_tarea[1]+"-"+cant_tarea_realizada;
+            }); 
             
             var parametros={
                 accion: 'IE',
@@ -150,6 +225,7 @@ function guardar_registro_avance(accion){
                 fecha_certificacion_avance:     $("#txt_fecha_certificacion").val(), 
                 empleados:                      empleados,
                 materiales:                     materiales,
+                tareas:                         tareas,
                 txt_pendiente:                  $("#txt_pendiente").val(),
                 txt_zanjeo:                     $("#txt_zanjeo").val(),
                 txt_rotura:                     $("#txt_rotura").val(),
@@ -188,11 +264,15 @@ function validar_datos(){
         txt_observacion=$("#txt_observacion").val();
         var empleados = new Array();
         var materiales= new Array();
+        var tareas= new Array();
         $("#tabla_empleado tbody tr").each(function () {
                      empleados.push($(this).attr('id'));
         });
         $("#tabla_material tbody tr").each(function () {
                      materiales.push($(this).attr('id'));
+        });
+        $("#tabla_tareas tbody tr").each(function () {
+                     tareas.push($(this).attr('id'));
         });
         
         if(typeof(txt_fecha_inicio)=='undefined'){txt_fecha_inicio='';}
@@ -204,7 +284,6 @@ function validar_datos(){
         }
         
         // RELACION ENTRE EMPLEADOS Y TAREAS CON CERTIFICACION
-        var tareas=txt_zanjeo+txt_rotura+txt_cruce+txt_pozo_maq+txt_pozo_rec+txt_pozo_emp+txt_pozo_rulo+txt_jornal;
         if(empleados !=''){
             if(tareas==''){mensaje+='* Debe elejir por lo menos una tarea \n';}
             if(txt_fecha_certificacion==''){mensaje+='* Debe elejir una fecha de certificacion \n';}    

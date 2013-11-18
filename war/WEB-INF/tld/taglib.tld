@@ -422,6 +422,18 @@
           </attribute>
 	</tag>
         <tag>
+        <name>ComboTarea</name>
+    	    <tag-class>org.isft.web.tags.TagComboTarea</tag-class>
+          <body-content>empty</body-content>
+          <description>Tag with Parameter</description>
+          <attribute>
+	            <name>nombreCombo</name>
+		     			<required>true</required>
+				      <rtexprvalue>true</rtexprvalue>
+				      <type>String</type>
+		      </attribute>  
+	</tag>
+        <tag>
         <name>ComboEmpleado</name>
     	  <tag-class>org.isft.web.tags.TagComboEmpleado</tag-class>
           <body-content>empty</body-content>

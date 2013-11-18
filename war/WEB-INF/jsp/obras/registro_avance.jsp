@@ -39,7 +39,7 @@ if(accion==null){
 			<td width="50%">
 					<fieldset>
 						<legend>Grupo de trabajo</legend>
-                                                     <div style="height: 200px; overflow: auto;">
+                                                     <div style="height: 150px; overflow: auto;">
                                                         <table class="table table-hover table-bordered table-condensed" width="100%" id="tabla_empleado">
                                                             <thead>
                                                                 <tr>
@@ -61,13 +61,15 @@ if(accion==null){
 				<td width="50%">
 					<fieldset>
 						<legend>Materiales</legend>
-                                                 <div style="height: 200px; overflow: auto;">
+                                                 <div style="height: 150px; overflow: auto;">
 							<table class="table table-hover table-bordered table-condensed" width="100%" id="tabla_material">
 								<thead>
 									<tr>
-										<th >Material</th>
-                                                                                <th> Cantidad</th>
-										<th > Stock</th>
+										<th> Material</th>
+                                                                                <th> Cantidad </th>
+										<th> Stock propio </th>
+                                                                                <th> Cantidad </th>
+                                                                                <th> Stock Provisto</th>
 										<th> 
                                                                                     <div id="div_button_add_material">
                                                                                         <input class="btn  btn-primary"   type="button" name="btn_agregar_material" value="+" style="height:20px" onclick="javascript:ver_materiales()"/>
@@ -95,38 +97,34 @@ if(accion==null){
 	</div>
 	<fieldset>
 		<legend>Desgloce de trabajo</legend>
-		<table width="100%">
-			<tr>
-				<td>Zanjeo</td>
-				<td>Rotura</td>
-				<td>Cruce</td>
-				<td>Pozo Maq</td>	
-				<td>Pozo Rec</td>
-				<td>Pozo Emp</td>
-				<td>Pozo Rulo</td>
-				<td>Jornal</td>	
-			</tr>
-				<td><input name="txt_zanjeo" id="txt_zanjeo" style="width:70px" type="text" /></td>
-				<td><input name="txt_rotura" id="txt_rotura" style="width:70px" type="text" /></td>
-				<td><input name="txt_cruce" id="txt_cruce" style="width:70px" type="text" /></td>
-				<td><input name="txt_pozo_maq" id="txt_pozo_maq" style="width:70px" type="text" /></td>
-				<td><input name="txt_pozo_rec" id="txt_pozo_rec" style="width:70px" type="text" /></td>
-				<td><input name="txt_pozo_emp" id="txt_pozo_emp" style="width:70px" type="text" /></td>
-				<td><input name="txt_pozo_rulo" id="txt_pozo_rulo" style="width:70px" type="text" /></td>
-				<td><input name="txt_jornal" id="txt_jornal" style="width:70px" type="text" /></td>
-			</tr>
-		</table>
-		<table width="100%">
-			<tr>
-				<td width="90%">&nbsp;</td>
-				<td>Total</td>
-				<td>$1000</td>
-			</tr>
-		</table>
+		<div style="height: 150px; overflow: auto;">
+                        <table class="table table-hover table-bordered table-condensed" width="100%" id="tabla_tareas">
+                                <thead>
+                                        <tr>
+                                                <th > Tarea </th>
+                                                <th> Cantidad</th>
+                                                <th> 
+                                                    <div id="div_button_add_tarea">
+                                                        <input class="btn  btn-primary"   type="button" name="btn_agregar_tarea" value="+" style="height:20px" onclick="javascript:ver_tarea()"/>
+                                                    </div>
+                                                    <div id="div_tarea" style="display:none">
+                                                        <tag:ComboTarea nombreCombo="cbo_tarea"/>
+                                                        <input class="btn  btn-primary"   type="button" name="btn_ok_add_tarea" value="si" onclick="javascript:ok_add_tarea()"/>
+                                                        <input class="btn  btn-primary"   type="button" name="btn_close_add_tarea" value="no" onclick="javascript:cancel_add_tarea()"/>
+                                                    </div>    
+                                                </th> 
+                                        </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                        </table>
+                 </div>
 	</fieldset>
 	<div class="row">
 		<div class="span2" style="text-align:right">Observaciones</div>
-		<div class="span3"><textarea name="txt_observacion" id="txt_observacion" style="width: 700px; height: 30px"></textarea></div>	
+		<div class="span6"><textarea name="txt_observacion" id="txt_observacion" style="width: 500px; height: 30px"></textarea></div>
+                <div class="span4">Total $1000</div>
 	</div>	
 	<div class="row">
 	    <div class="span3" style="text-align:right"><input type="button" class="btn btn-primary" value="Guardar" onclick="javascript:guardar_registro_avance(document.getElementById('accion').value)"></div>

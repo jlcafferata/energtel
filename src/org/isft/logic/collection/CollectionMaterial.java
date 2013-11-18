@@ -25,11 +25,12 @@ public class CollectionMaterial extends AccessManager implements AccessInterface
             ResultSet rst = execute(sql);   
             System.out.println("EJECUTO CONSULTA");
             while(rst.next()){
-               // System.out.println("EN EL WHILE");  
+               // System.out.println("EN EL WHILE");
                 Material value=new Material();
                 value.setCodigo(rst.getString("cod_material"));
                 value.setDescripcion(rst.getString("descripcion"));
-                value.setStock(rst.getString("stock"));
+                value.setStock_propio(rst.getString("stock_propio"));
+                value.setStock_provisto(rst.getString("stock_provisto"));
                 vec.add(value);
             }             
         }catch(Exception exc){

@@ -215,8 +215,13 @@ function grabar(parametros){
       url: 'manager.obra',
       data: parametros,
       success: function(response){
-           Notifier.success('\n ' + (parametros.accion=="A"? 'Alta': 'Modificacion') + ' de la obra efectuada con exitoso ');
-   				 finalizar_cambios();	
+           if(response.substring(0,5)=='ERROR' && parametros.accion=="A"){
+                Notifier.warning(response.substring(6));
+           }else{    
+                Notifier.success('\n ' + (parametros.accion=="A"? 'Alta': 'Modificacion') + ' de la obra efectuada con exitoso ');
+           } 
+              finalizar_cambios();	
+                                 
       },
       error: function(response){
             Notifier.error(response.statusText);	

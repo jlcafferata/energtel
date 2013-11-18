@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import org.isft.domain.helper.FechaHora;
 import org.isft.logic.updater.AbmObra;
+import org.isft.logic.validator.ChequearDatosObra;
 
 
 public class ControladorObra  extends HttpServlet {
@@ -52,9 +53,7 @@ public class ControladorObra  extends HttpServlet {
                 String txt_pozo_rulo = request.getParameter("txt_pozo_rulo");
                 String txt_jornal = request.getParameter("txt_jornal");
                 String txt_observacion = request.getParameter("txt_observacion");
-                
-                System.out.println("Empleados request: "+ request.getParameter("empleados"));
-                System.out.println("Empleados variable: "+ empleados);
+                String tareas = request.getParameter("tareas");
                 
                 if(accion==null){accion="";}                  
                 if(poa_alta==null){poa_alta="";}                  
@@ -86,6 +85,7 @@ public class ControladorObra  extends HttpServlet {
                 if(txt_pozo_rulo==null){txt_pozo_rulo="";}
                 if(txt_jornal==null){txt_jornal="";}
                 if(txt_observacion==null){txt_observacion="";}
+                if(tareas==null){tareas="";}
                 
                 HashMap param=new HashMap();
                 
@@ -126,12 +126,24 @@ public class ControladorObra  extends HttpServlet {
                 param.put("observacion",txt_observacion);
                 param.put("fecha_actual",fecha_actual);
                 param.put("hora_carga",hora_carga);
+                param.put("tareas",tareas);
+                
+                response.setContentType("html/text");
+                ChequearDatosObra cdo=new ChequearDatosObra();
+                
                 
         AbmObra abm=new AbmObra();
         
 	try{
             if(accion.equals("A")){
-                    abm.insert(param);
+                    String validos=cdo.esValidoParaAltaPoa((String)param.get("poa_alta"));
+                    if(validos.equals("")){
+                        abm.insert(param);
+                    }else{
+                        response.getWriter().write("ERROR:"+validos);
+                        return;
+                    }
+                    
             } else if(accion.equals("IE")){
                     abm.iniciarEjecucion(param);
             } else {
