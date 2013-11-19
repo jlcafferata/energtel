@@ -166,25 +166,24 @@ public class AbmObra extends UpdaterManager implements UpdaterInterface{
     public void iniciarEjecucion(HashMap param) throws Exception {
         try{
             //ESTO ES LO DE CAMBIO DE PRESUPUESTADA A EJECUCION
-            String sql_update="UPDATE OBRA SET";
-            String cambios="";
-            cambios+=" estado= '"+(String)param.get("estado")+"'";
-            if((String)param.get("zona_obra_alta")!=""){
-                cambios+=", cod_zona= "+(String)param.get("zona_obra_alta");
-            }
-            if((String)param.get("tipo_obra_alta")!=""){
-                cambios+=", cod_tipo_obra= "+(String)param.get("tipo_obra_alta");
-            }
-            if((String)param.get("fecha_actual")!=""){
-                cambios+=", fecha_inicio= '"+(String)param.get("fecha_actual")+"'";
-            }
-            if((String)param.get("observacion")!=""){
-                cambios+=", observaciones= '"+(String)param.get("observacion")+"'";
-            }
-            sql_update+=cambios;
-            sql_update+=" where poa='"+(String)param.get("poa_alta")+"'";
-            
+            update(param);
             //ACA EMPIEZA LO DE AVANCE
+            insertAvanceObra(param);
+            //AGREGAR AVANCE EMPLEADO
+            insertAvanceEmpleadoObra(param);
+            //AGREGAR MATERIALES AVANCE OBRA Y DESCONTAR STOCK SI ES NECESARIO
+            insertAvanceMaterialObra(param);
+            //AGREGAR TAREAS AVANCE OBRA
+            insertTareaAvanceObra(param);
+        } catch(Exception exc){
+           throw new Exception(exc.getMessage());
+        }
+
+    }
+
+
+    private void insertAvanceObra(HashMap param) throws Exception {
+        try{
             boolean realizar_avance=false;
             if((String)param.get("fecha_certificacion_avance")!=""){
                 realizar_avance=true;
@@ -209,14 +208,17 @@ public class AbmObra extends UpdaterManager implements UpdaterInterface{
             
             String sql_avance="insert into Avance_obra ("+campos_avance_obra+") values ("+datos_avance_obra+")";
             System.out.println("Los legajos de empleados son: "+ (String)param.get("empleados"));
-            System.out.println("Cadena de update: " + sql_update);
             if(realizar_avance){
                 System.out.println("Cadena de avance de obra: "+ sql_avance);
                 execute(sql_avance);
-            }
-            execute(sql_update);
-            
-            //AGREGAR AVANCE EMPLEADO
+            }  
+        } catch(Exception exc){
+           throw new Exception(exc.getMessage());
+        }
+    }  
+
+    private void insertAvanceEmpleadoObra(HashMap param) throws Exception {
+        try{
             if((String)param.get("empleados")!=""){
                 String aux=(String)param.get("empleados");
                 String[] empleado=aux.split("@");
@@ -241,8 +243,13 @@ public class AbmObra extends UpdaterManager implements UpdaterInterface{
                     execute(sql_avance_empleado);
                 }
             }
-            
-            //AGREGAR MATERIALES AVANCE OBRA Y DESCONTAR STOCK SI ES NECESARIO
+        }catch(Exception exc){
+           throw new Exception(exc.getMessage());
+        }
+    }
+
+    private void insertAvanceMaterialObra(HashMap param) throws Exception {
+        try{
             if((String)param.get("materiales")!=""){
                 String aux=(String)param.get("materiales");
                 String[] materiales=aux.split("@");
@@ -264,8 +271,12 @@ public class AbmObra extends UpdaterManager implements UpdaterInterface{
                         datos_avance_materiales+=", '"+(String)param.get("hora_carga")+"'";
                     }
                     if(material[1]!="0"){
-                        campos_avance_materiales+=", cantidad";
-                        datos_avance_materiales+=", "+material[1]+"";
+                        campos_avance_materiales+=", cantidad_propia";
+                        datos_avance_materiales+=", "+Integer.parseInt(material[1])+"";
+                    }
+                    if(material[3]!="0"){
+                        campos_avance_materiales+=", cantidad_provistos";
+                        datos_avance_materiales+=", "+Integer.parseInt(material[3])+"";
                     }
                     if(material[1]!="0" || material[3]!="0"){
                         int cant_usada_propio=Integer.parseInt(material[1]);
@@ -285,8 +296,13 @@ public class AbmObra extends UpdaterManager implements UpdaterInterface{
                     execute(sql_avance_materiales_obra);
                 }
             }
-            
-            //AGREGAR TAREAS AVANCE OBRA
+        }catch(Exception exc){
+           throw new Exception(exc.getMessage());
+        }
+    }
+
+    private void insertTareaAvanceObra(HashMap param) throws Exception {
+        try{
             if((String)param.get("tareas")!=""){
                 String aux=(String)param.get("tareas");
                 String[] tareas=aux.split("@");
@@ -316,13 +332,8 @@ public class AbmObra extends UpdaterManager implements UpdaterInterface{
                     execute(sql_avance_tareas_obra);
                 }
             }
-            
-            
-        } catch(Exception exc){
+        }catch(Exception exc){
            throw new Exception(exc.getMessage());
         }
-
     }
-    
-    
 }

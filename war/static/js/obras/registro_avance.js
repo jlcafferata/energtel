@@ -13,7 +13,20 @@ function onload(){
 		display_date: new Date() // the display date (default is start_date)
 		});
 	});
-	
+        
+        $("#buscar_avance").hide();
+        if($("#accion").val()=='M'){
+            $("#boton_avaces_previos").hide();
+        }else{
+            $("#boton_avaces_previos").show();
+        }
+        if($("#accion").val()=='MAO'){
+            var fc=$("#fecha_certificada").val();
+            var hc=$("#hora_cargada").val();
+            var poa=$("#txt_poa_ejecucion").val();
+            llenarTablas(fc,hc,poa);
+        }
+
 }
 function ver_empleados(){
 	$("#div_button_add_empleado").hide("slow");
@@ -173,6 +186,7 @@ function cancel_add_material(){
 }
 
 function guardar_registro_avance(accion){
+        
         if(validar_datos()){
             var empleados ='';
             var materiales='';
@@ -227,19 +241,11 @@ function guardar_registro_avance(accion){
                 materiales:                     materiales,
                 tareas:                         tareas,
                 txt_pendiente:                  $("#txt_pendiente").val(),
-                txt_zanjeo:                     $("#txt_zanjeo").val(),
-                txt_rotura:                     $("#txt_rotura").val(),
-                txt_cruce:                      $("#txt_cruce").val(),
-                txt_pozo_maq:                   $("#txt_pozo_maq").val(),
-                txt_pozo_rec:                   $("#txt_pozo_rec").val(),
-                txt_pozo_emp:                   $("#txt_pozo_emp").val(),
-                txt_pozo_rulo:                  $("#txt_pozo_rulo").val(),
-                txt_jornal:                     $("#txt_jornal").val(),
                 txt_observacion:                $("#txt_observacion").val(),
                 estado:				"eje",
             };
             console.log(parametros);
-            pasarEjecucion(parametros);
+            pasarEjecucion(parametros);            
             $('#myModal').modal('hide');
                 
         }
@@ -252,16 +258,7 @@ function validar_datos(){
         cbo_zona_obra_aejecucion=$("#cbo_zona_obra_aejecucion").val(),
         txt_fecha_inicio=$("#txt_fecha_inicio").val(),
         txt_fecha_certificacion=$("#txt_fecha_certificacion").val(),
-        txt_pendiente=$("#txt_pendiente").val(),
-        txt_zanjeo=$("#txt_zanjeo").val(),
-        txt_rotura=$("#txt_rotura").val(),
-        txt_cruce=$("#txt_cruce").val(),
-        txt_pozo_maq=$("#txt_pozo_maq").val(),
-        txt_pozo_rec=$("#txt_pozo_rec").val(),
-        txt_pozo_emp=$("#txt_pozo_emp").val(),
-        txt_pozo_rulo=$("#txt_pozo_rulo").val(),
-        txt_jornal=$("#txt_jornal").val(),
-        txt_observacion=$("#txt_observacion").val();
+        txt_pendiente=$("#txt_pendiente").val();
         var empleados = new Array();
         var materiales= new Array();
         var tareas= new Array();
@@ -285,7 +282,6 @@ function validar_datos(){
         
         // RELACION ENTRE EMPLEADOS Y TAREAS CON CERTIFICACION
         if(empleados !=''){
-            if(tareas==''){mensaje+='* Debe elejir por lo menos una tarea \n';}
             if(txt_fecha_certificacion==''){mensaje+='* Debe elejir una fecha de certificacion \n';}    
         }
         if(tareas!=''){
@@ -320,11 +316,21 @@ function pasarEjecucion(parametros){
       url: 'manager.obra',
       data: parametros,
       success: function(response){
-           Notifier.success('Pasaje a ejecucion realizado');
+           Notifier.success('Informacion guardada con exito');
            goPage(4002);
       },
       error: function(response){
             Notifier.error(response.statusText);	
       } 
     });
+}
+
+function irAvancesPrevios(poa){
+        $('.modal-body').load("jsp/obras/avances_previos.jsp?poa="+poa);
+}
+
+function llenarTablas(fecha_certificada,hora_cargada,poa){
+    $("#div_txt_fecha_certificacion").show();
+    $("#div_combo_fecha_certificacion").hide();
+    $("#txt_fecha_certificacion").val('valor');
 }

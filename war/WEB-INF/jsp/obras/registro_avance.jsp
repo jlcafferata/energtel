@@ -14,9 +14,36 @@ if(poa==null){
 String accion=request.getParameter("accion");
 if(accion==null){
 	accion="";
-}%>
-<body>
+}
+String fecha_certificada=request.getParameter("fecha_certificada");
+if(fecha_certificada==null){
+	fecha_certificada="";
+}else{
+    String dia=fecha_certificada.substring(0,2);
+    String mes=fecha_certificada.substring(2,4);
+    String anio=fecha_certificada.substring(4,8);
+    fecha_certificada=dia+"/"+mes+"/"+anio;
+}
+String hora_cargada=request.getParameter("hora_cargada");
+if(hora_cargada==null){
+	hora_cargada="";
+}else{
+    String hora=hora_cargada.substring(0,2);
+    String min=hora_cargada.substring(2,4);
+    String seg=hora_cargada.substring(4,6);
+    hora_cargada=hora+":"+min+":"+seg;
+}
+
+String fecha_completa_certificada="";
+if(fecha_certificada!=""&&hora_cargada!=""){
+    fecha_completa_certificada=fecha_certificada+" "+hora_cargada;
+}
+
+%>
+<body>   
 <input type="hidden" id="accion" value="<%=accion%>"/>
+<input type="hidden" id="fecha_certificada" value="<%=fecha_certificada%>"/>
+<input type="hidden" id="hora_cargada" value="<%=hora_cargada%>"/>
 <fieldset style="margin:5px">
 <legend>Avance de obra</legend>
 <div id="div_cabecera">
@@ -32,7 +59,8 @@ if(accion==null){
 		<div class="span1" style="display: none;">Fecha inicio</div>
 		<div class="span2" style="display: none;"><input type="text" id="txt_fecha_inicio" style="width:120px"/></div>
 		<div class="span3" style="text-align:right">Fecha certificacion</div>
-		<div class="span3"><input type="text" id="txt_fecha_certificacion" style="width:120px"/></div>
+		<div class="span3" id="div_combo_fecha_certificacion"><input type="text" id="txt_fecha_certificacion" style="width:120px"/></div>
+                <div class="span3" id="div_txt_fecha_certificacion" style="display:none"><input type="text" id="txt_fecha_certificacion" style="width:160px" value="<%=fecha_completa_certificada%>" disabled/></div>
 	</div>
 	<table width="100%">
 		<tr>
@@ -128,6 +156,7 @@ if(accion==null){
 	</div>	
 	<div class="row">
 	    <div class="span3" style="text-align:right"><input type="button" class="btn btn-primary" value="Guardar" onclick="javascript:guardar_registro_avance(document.getElementById('accion').value)"></div>
+            <div class="span3" style="text-align:right" id="boton_avaces_previos"><a class="btn btn-default my-link" href="javascript: irAvancesPrevios(<%=poa%>)">Avances Previos</a></div>
 	</div>
 </fieldset>
 

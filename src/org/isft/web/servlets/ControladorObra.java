@@ -44,14 +44,6 @@ public class ControladorObra  extends HttpServlet {
                 String empleados = request.getParameter("empleados");
                 String materiales = request.getParameter("materiales");
                 String txt_pendiente = request.getParameter("txt_pendiente");
-                String txt_zanjeo = request.getParameter("txt_zanjeo");
-                String txt_rotura = request.getParameter("txt_rotura");
-                String txt_cruce = request.getParameter("txt_cruce");
-                String txt_pozo_maq = request.getParameter("txt_pozo_maq");
-                String txt_pozo_rec = request.getParameter("txt_pozo_rec");
-                String txt_pozo_emp = request.getParameter("txt_pozo_emp");
-                String txt_pozo_rulo = request.getParameter("txt_pozo_rulo");
-                String txt_jornal = request.getParameter("txt_jornal");
                 String txt_observacion = request.getParameter("txt_observacion");
                 String tareas = request.getParameter("tareas");
                 
@@ -76,14 +68,6 @@ public class ControladorObra  extends HttpServlet {
                 if(empleados==null){empleados="";}
                 if(materiales==null){materiales="";}
                 if(txt_pendiente==null){txt_pendiente="";}
-                if(txt_zanjeo==null){txt_zanjeo="";}
-                if(txt_rotura==null){txt_rotura="";}
-                if(txt_cruce==null){txt_cruce="";}
-                if(txt_pozo_maq==null){txt_pozo_maq="";}
-                if(txt_pozo_rec==null){txt_pozo_rec="";}
-                if(txt_pozo_emp==null){txt_pozo_emp="";}
-                if(txt_pozo_rulo==null){txt_pozo_rulo="";}
-                if(txt_jornal==null){txt_jornal="";}
                 if(txt_observacion==null){txt_observacion="";}
                 if(tareas==null){tareas="";}
                 
@@ -115,14 +99,6 @@ public class ControladorObra  extends HttpServlet {
                 param.put("empleados",empleados);
                 param.put("materiales",materiales);
                 param.put("pendiente",txt_pendiente);
-                param.put("zanjeo",txt_zanjeo);
-                param.put("rotura",txt_rotura);
-                param.put("cruce",txt_cruce);
-                param.put("pozo_maq",txt_pozo_maq);
-                param.put("pozo_rec",txt_pozo_rec);
-                param.put("pozo_emp",txt_pozo_emp);
-                param.put("pozo_rulo",txt_pozo_rulo);
-                param.put("jornal",txt_jornal);
                 param.put("observacion",txt_observacion);
                 param.put("fecha_actual",fecha_actual);
                 param.put("hora_carga",hora_carga);
@@ -142,12 +118,10 @@ public class ControladorObra  extends HttpServlet {
                     }else{
                         response.getWriter().write("ERROR:"+validos);
                         return;
-                    }
-                    
-            } else if(accion.equals("IE")){
+                    }    
+            }
+            if(accion.equals("IE")){//INICIAR EJECUCION
                     abm.iniciarEjecucion(param);
-            } else {
-                    abm.update(param);
             }
         } 
         catch(ServletException exc){
