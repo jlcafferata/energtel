@@ -105,8 +105,8 @@ function validar_datos(){
     if(txt_fecha_pago!='' && txt_fecha_inicio!='' && (txt_fecha_pago-txt_fecha_inicio)<0){
     	mensaje+='* La fecha de pago no puede ser menor a la fecha de inicio \n';	
     }
-     
-    if(txt_poa==''){
+
+		if(txt_poa==''){
         mensaje+='* Debe ingresar POA \n';
     }     
     if(txt_cuil!='' && txt_cuil.length<13){
@@ -142,19 +142,81 @@ function validar_datos(){
         mensaje+='* El valor de la orden de compra debe ser mayor a 0 \n';
     }
     
+    
     if(mensaje!=''){
         alert(mensaje);
         return false;
     } else{
-        return true;
+    		return true;
     }
     
+    
+}
+
+function evaluar_pasaje_por_fecha(estado){
+	  var txt_fecha_inicio=    	  $("#txt_fecha_alta_presupuestada").val(),       
+        txt_fecha_cierre=     	$("#txt_fecha_cierre_presupuestada").val(),     
+        txt_fecha_certificacion=$("#txt_fecha_certificacion_presupuestada").val(),       
+        txt_fecha_pago=					$("#txt_fecha_pago").val();
+    
+    if(typeof(txt_fecha_inicio)=='undefined'){
+    	txt_fecha_inicio='';
+    }
+    if(typeof(txt_fecha_certificacion)=='undefined'){
+    	txt_fecha_certificacion='';
+    }
+    if(typeof(txt_fecha_cierre)=='undefined'){
+    	txt_fecha_cierre='';
+    }
+    if(typeof(txt_fecha_pago)=='undefined'){
+    	txt_fecha_pago='';
+    }
+    
+    var pasar_a=estado;
+     
+	  if(txt_fecha_certificacion!=''){
+					if(confirm('Ha ingresado fecha de CERTIFICACION. La obra va a moverse  a CERTIFICADA. Desea continuar?')){
+						pasar_a='CER';				
+					}else{
+						pasar_a='';
+					}
+		} else{ 
+				if(txt_fecha_cierre!=''){
+					if(!confirm('Ha ingresado fecha de CIERRE. Confirma establecerla en este momento?')){
+						pasar_a='';
+					}
+				} else{
+					if(txt_fecha_pago!=''){
+						if(confirm('Ha ingresado fecha de PAGO. La obra va a moverse a COBRADA. Desea continuar?')){
+							pasar_a='COB';
+						}else{
+							pasar_a='';
+						}
+					} else{
+						if(txt_fecha_inicio!=''){
+							if(confirm('Ha ingresado fecha de INICIO. La obra va a moverse a EN EJECUCION. Desea continuar?')){
+								pasar_a='EJE';				
+							} else{
+									pasar_a='';
+							}
+						}
+					}
+				}
+	  }
+  	
+  	return pasar_a;
 }
 
 function confirmar_modificacion(estado){
 	  if(!validar_datos()){
         return false;
     }    
+		
+		estado=evaluar_pasaje_por_fecha(estado);
+		
+		if(estado==''){
+			return false;
+		}
 		
     var parametros={
         accion: 'M',
