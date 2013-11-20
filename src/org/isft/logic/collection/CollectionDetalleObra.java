@@ -17,7 +17,7 @@ public class CollectionDetalleObra extends AccessManager implements AccessInterf
        public Vector select(HashMap param) throws Exception{
         Vector vec= new Vector();
         try{
-        		String sql="SELECT Obra.poa, Obra.cuit_cliente, Obra.fecha_certificacion, Obra.nro_recibo, "
+        		String sql="SELECT Obra.estado, Obra.poa, Obra.cuit_cliente, Obra.fecha_certificacion, Obra.nro_recibo, "
                                 + "Obra.fecha_facturacion, Obra.cod_zona, Obra.cod_tipo_obra, Obra.cod_especificacion, "
                                 + "Obra.cod_forma_obra, Obra.medicion_estimada, Obra.fecha_inicio, Obra.fecha_cierre, "
                                 + "Cliente.razon_social, Zona.descripcion as descripcion_zona, Tipo_obra.descripcion as "
@@ -53,6 +53,7 @@ public class CollectionDetalleObra extends AccessManager implements AccessInterf
             while(rst.next()){
                 //System.out.println("EN EL WHILE");
                 DetalleObra obj=new DetalleObra();
+                obj.setEstado(rst.getString("estado"));
                 obj.setCuit_cliente(rst.getString("cuit_cliente"));
                 obj.setPoa(rst.getString("poa"));
                 obj.setFecha_inicio(rst.getString("fecha_inicio"));

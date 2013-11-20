@@ -20,7 +20,7 @@ function alta(){
 }
 
 function certificar(poa){
-	$('.modal-body').load("jsp/obras/seguimiento.jsp?accion=certificar&poa="+poa+"&modalidad=A");
+	$('.modal-body').load("jsp/obras/seguimiento.jsp?accion=certificar&modalidad=A");
 	$('#myModal').modal('show');
 }
 

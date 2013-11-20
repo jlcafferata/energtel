@@ -2,6 +2,7 @@ package org.isft.domain;
 
 public class DetalleObra{
     private String poa;
+    private String estado;
     private String cuit_cliente;
     private String fecha_certificacion;
     private String cod_zona;
@@ -282,5 +283,19 @@ public class DetalleObra{
      */
     public void setNro_recibo(String nro_recibo) {
         this.nro_recibo = nro_recibo;
+    }
+
+    /**
+     * @return the estado
+     */
+    public String getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }

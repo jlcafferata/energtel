@@ -47,7 +47,8 @@ if(!accion.equals("")){
 	</div>
 	<div class="row">
 		<div class="span2" style="text-align:right">Fecha inicio obra</div>
-		<div class="span3"><input name="txt_fecha_alta_alta" id="txt_fecha_alta_presupuestada" type="text" value="<%=FechaHora.getFechaView(detalleObra.getFecha_inicio())%>"/></div>
+		<div class="span3"><input name="txt_fecha_alta_alta" id="txt_fecha_alta_presupuestada" type="text" value="<%=FechaHora.getFechaView(detalleObra.getFecha_inicio())%>"  
+		<%if(detalleObra.getEstado()!=null && !detalleObra.getEstado().equals("PRE")){%> disabled <%}%>/></div>
 		<div class="span2" style="text-align:right">Fecha cierre obra</div>
 		<div class="span3"><input name="txt_fecha_cierre" id="txt_fecha_cierre_presupuestada" type="text" value="<%=FechaHora.getFechaView(detalleObra.getFecha_cierre())%>"/></div>
 	</div>
