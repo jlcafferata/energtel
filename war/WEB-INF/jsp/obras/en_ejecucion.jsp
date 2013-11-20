@@ -55,11 +55,11 @@ if(txt_fecha_hasta==null){
 				</div>
 			</div>
 						
-			<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:80%; left:10%; margin-left:0px; height:550px; max-height:550px">
+			<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:80%; left:10%; margin-left:0px; height:650px; max-height:650px; top:5px;">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
 					</div>
-					<div class="modal-body" style="max-height: 550px;"></div>
+					<div class="modal-body" style="height:600px; max-height: 650px"></div>
 			</div>			
 		</div>
 	</div>
