@@ -14,11 +14,11 @@ function filtrar(){
     var fecha=$("#txt_fecha_avances_previos").val();
     var poa=$("#txt_poa_avances_previos").val();
     if(typeof(fecha)=='undefined'){txt_fecha_inicio='';}
-    //if(fecha!=''){
+    if(fecha!=''){
         $('.modal-body').load("jsp/obras/avances_previos.jsp?poa="+poa+"&fecha="+fecha_to_db(fecha));
-    /*}else{
+    }else{
         alert('No hay ningun criterio seleccionado para filtrar');
-    }*/
+    }
 }
 
 function modificarAvancePrevio(fecha_certifiada,hora_cargada){

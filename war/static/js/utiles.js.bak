@@ -47,8 +47,5 @@ function fecha_to_db(fecha){
           dia_alta=fecha.substring(8,10);
       }
       fecha=mes_alta+"/"+dia_alta+"/"+anio_alta;
-			if(fecha=='//'){
-				fecha='';
-			}
 			return fecha;
 }

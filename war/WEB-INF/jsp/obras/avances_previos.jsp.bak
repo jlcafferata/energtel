@@ -19,7 +19,7 @@ if(fecha==null){
             <div class="span2" style="text-align:right" >POA</div>
             <div class="span2"><input type="text" id="txt_poa_avances_previos"  style="width:80px" maxlength="9" value="<%=poa%>" disabled/></div>
             <div class="span2" style="text-align:right">Fecha</div>
-            <div class="span2"><input type="text" id="txt_fecha_avances_previos" style="width:120px" value="<%=fecha%>"/></div>
+            <div class="span2"><input type="text" id="txt_fecha_avances_previos" name="fecha" style="width:120px" value="<%=fecha%>"/></div>
             <div class="span3"><input class="btn  btn-primary" type="button" name="btn_filtrar" value="Filtrar" onclick="javascript:filtrar()"></div>
         </div>
     </fieldset>
