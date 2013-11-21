@@ -28,10 +28,10 @@ function filtrar(){
 		path+='&txt_poa='+poa;
 	}
 	if(txt_fecha_desde && txt_fecha_desde!=''){
-		path+='&txt_fecha_desde='+txt_fecha_desde;
+		path+='&txt_fecha_desde='+fecha_to_db(txt_fecha_desde);
 	}
 	if(txt_fecha_hasta && txt_fecha_hasta!=''){
-		path+='&txt_fecha_hasta='+txt_fecha_hasta;
+		path+='&txt_fecha_hasta='+fecha_to_db(txt_fecha_hasta);
 	}
 	goPage(path);
 }

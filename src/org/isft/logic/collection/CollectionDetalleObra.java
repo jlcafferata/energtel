@@ -45,6 +45,12 @@ public class CollectionDetalleObra extends AccessManager implements AccessInterf
                                 if(param.get("pagina")!=null && !param.get("pagina").equals("")){
         				sql+=" and obra.estado='" + (String)param.get("pagina")+"'";
         			}
+                                if(param.get("fecha_desde")!=null && !param.get("fecha_desde").equals("")){
+        				sql+=" and obra.fecha_inicio>=#" + (String)param.get("fecha_desde")+" 00:00:00#";
+        			}
+                                if(param.get("fecha_hasta")!=null && !param.get("fecha_hasta").equals("")){
+        				sql+=" and obra.fecha_inicio<=#" + (String)param.get("fecha_hasta")+" 23:59:59#";
+        			}
         		}
         		
 		     		System.out.println("CONSULTA A EJECUTAR: " + sql);

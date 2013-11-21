@@ -41,6 +41,12 @@ public class TagGrillaDetalleObra extends TagGrilla {
                                                 if(this.getPagina()!=null && !this.getPagina().equals("")){
                                                     param.put("pagina", this.getPagina());
                                                 }
+                                                if(this.getFecha_desde()!=null && !this.getFecha_desde().equals("")){
+                                                    param.put("fecha_desde", this.getFecha_desde());
+                                                }
+                                                if(this.getFecha_hasta()!=null && !this.getFecha_hasta().equals("")){
+                                                    param.put("fecha_hasta", this.getFecha_hasta());
+                                                }
 						Vector <DetalleObra> vec= collection.select(param);
 						String clase="";
 						if(vec.size()==0){
@@ -54,7 +60,7 @@ public class TagGrillaDetalleObra extends TagGrilla {
 							 }
 							 table+="<tr class=\""+clase+"\"><td>"+vec.get(i).getPoa()+"</td>";
 							 table+="<td>"+vec.get(i).getRazon_social()+"</td>";
-							 table+="<td>"+vec.get(i).getFecha_inicio()+"</td>";
+							 table+="<td>"+vec.get(i).getFecha_inicio_view()+"</td>";
                table+="<td>"+vec.get(i).getDescripcion_zona()+"</td>";
 		           table+="<td>"+vec.get(i).getDescripcion_tipo_obra()+"</td>";
 		           table+="<td>"+vec.get(i).getDescripcion_forma_obra()+"</td>";

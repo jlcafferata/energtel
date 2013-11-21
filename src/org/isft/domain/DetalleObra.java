@@ -1,5 +1,7 @@
 package org.isft.domain;
 
+import org.isft.domain.helper.FechaHora;
+
 public class DetalleObra{
     private String poa;
     private String estado;
@@ -75,7 +77,18 @@ public class DetalleObra{
 		 	return this.observaciones;
 		}
 		
-    public String getFecha_inicio(){
+   public String getFecha_inicio_view(){
+       String fecha=getFecha_inicio();
+       String fecha_sola="", hora_sola="";
+       String[] fechaSplit = fecha.split(" ");
+       try{
+           fecha_sola=FechaHora.getFechaWithBarras(fechaSplit[0]);
+           hora_sola=fechaSplit[1];
+       } catch(Exception exc){
+       }
+       return fecha_sola + " " + hora_sola;
+   } 
+   public String getFecha_inicio(){
        if(fecha_inicio==null){
             fecha_inicio="";
         } 
