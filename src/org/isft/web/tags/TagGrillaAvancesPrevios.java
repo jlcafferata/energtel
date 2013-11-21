@@ -43,7 +43,7 @@ public class TagGrillaAvancesPrevios extends TagGrilla {
                 String hora_mostrada=vec.elementAt(i).getHora();
                 table+="<th>"+fecha_mostrada+"</th>";
                 table+="<th>"+hora_mostrada+"</th>";
-                table+="<th><a href=\"javascript: modificarAvancePrevio('"+fecha_mostrada+ "','"+ hora_mostrada+"')\">Modificar</a></th>";
+                table+="<th><a href=\"javascript: modificarAvancePrevio('"+fecha_mostrada+ "','"+ hora_mostrada+"','"+vec.get(i).getTareas_pendientes()+"')\">Modificar</a></th>";
                 table+="</tr>";
             }
             

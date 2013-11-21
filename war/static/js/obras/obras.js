@@ -59,8 +59,8 @@ function pasar_a_facturada(poa){
 	}
 }
 
-function registro_avance(poa){
-	$('.modal-body').load("jsp/obras/registro_avance.jsp?poa="+poa);
+function registro_avance(poa,cod_zona,cod_tipo_obra){
+	$('.modal-body').load("jsp/obras/registro_avance.jsp?poa="+poa+"&cod_zona="+cod_zona+"&cod_tipo_obra="+cod_tipo_obra);
 	$('#myModal').modal('show');
 }
 

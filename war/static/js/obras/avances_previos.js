@@ -21,8 +21,14 @@ function filtrar(){
     }*/
 }
 
-function modificarAvancePrevio(fecha_certificada,hora_cargada){
+function modificarAvancePrevio(fecha_certificada,hora_cargada,tareas_pendientes){
     var poa=$("#txt_poa_avances_previos").val();
+    var cod_tipo_obra=$("#cbo_tipo_obra_previo").val();
+    var cod_zona=$("#cbo_zona_obra_previo").val();
     var fecha=fecha_to_db(fecha_certificada);
-    $('.modal-body').load("jsp/obras/registro_avance.jsp?poa="+poa+"&fecha_certificada="+fecha+"&hora_cargada="+hora_cargada+"&accion=MAO");
+    if(tareas_pendientes=='null'){
+        tareas_pendientes="";
+    }
+        
+    $('.modal-body').load("jsp/obras/registro_avance.jsp?poa="+poa+"&fecha_certificada="+fecha+"&hora_cargada="+hora_cargada+"&accion=MAO"+"&cod_tipo_obra="+cod_tipo_obra+"&cod_zona="+cod_zona+"&tareas_pendientes="+tareas_pendientes);
 }

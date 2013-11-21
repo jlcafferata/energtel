@@ -23,6 +23,19 @@ String hora_cargada=request.getParameter("hora_cargada");
 if(hora_cargada==null){
 	hora_cargada="";
 }
+String cod_zona=request.getParameter("cod_zona");
+if(cod_zona==null){
+	cod_zona="";
+}
+String cod_tipo_obra=request.getParameter("cod_tipo_obra");
+if(cod_tipo_obra==null){
+	cod_tipo_obra="";
+}
+
+String tareas_pendientes=request.getParameter("tareas_pendientes");
+if(tareas_pendientes==null){
+	tareas_pendientes="";
+}
 
 String fecha_completa_certificada="";
 if(fecha_certificada!=""&&hora_cargada!=""){
@@ -33,8 +46,6 @@ if(fecha_certificada!=""&&hora_cargada!=""){
 %>
 <body>   
 <input type="hidden" id="accion" value="<%=accion%>"/>
-<input type="hidden" id="fecha_certificada" value="<%=fecha_certificada%>"/>
-<input type="hidden" id="hora_cargada" value="<%=hora_cargada%>"/>
 <fieldset style="margin:5px">
 <legend>Avance de obra</legend>
 <div id="div_cabecera">
@@ -42,11 +53,11 @@ if(fecha_certificada!=""&&hora_cargada!=""){
 		<div class="span3" style="text-align:right">POA/OT</div>
 		<div class="span3"><input name="txt_poa" id="txt_poa_ejecucion" style="width:80px" type="text" value="<%=poa%>" disabled/></div>
 		<div class="span3" style="text-align:right">Tipo obra</div>
-		<div class="span3"><tag:ComboTipoObra nombreCombo="cbo_tipo_obra_aejecucion"/></div>
+		<div class="span3"><tag:ComboTipoObra nombreCombo="cbo_tipo_obra_aejecucion" selecto="<%=cod_tipo_obra%>"/></div>
 	</div>
 	<div class="row">
 		<div class="span3" style="text-align:right">Zona</div>
-		<div class="span3"><tag:ComboZona nombreCombo="cbo_zona_obra_aejecucion"/></div>
+		<div class="span3"><tag:ComboZona nombreCombo="cbo_zona_obra_aejecucion" selecto="<%=cod_zona%>"/></div>
 		<div class="span1" style="display: none;">Fecha inicio</div>
 		<div class="span2" style="display: none;"><input type="text" id="txt_fecha_inicio" style="width:120px"/></div>
 		<div class="span3" style="text-align:right">Fecha certificacion</div>
@@ -87,9 +98,9 @@ if(fecha_certificada!=""&&hora_cargada!=""){
 								<thead>
 									<tr>
 										<th> Material</th>
-                                                                                <th> Cantidad </th>
+                                                                                <th> Cantidad propio</th>
 										<th> Stock propio </th>
-                                                                                <th> Cantidad </th>
+                                                                                <th> Cantidad provisto</th>
                                                                                 <th> Stock Provisto</th>
 										<th> 
                                                                                     <div id="div_button_add_material">
@@ -114,7 +125,7 @@ if(fecha_certificada!=""&&hora_cargada!=""){
 	</table>
 	<div class="row">
 		<div class="span2" style="text-align:right">Pendiente</div>
-		<div class="span3"><textarea name="txt_pendiente" id="txt_pendiente" style="width: 700px; height: 30px"></textarea></div>	
+		<div class="span3"><textarea name="txt_pendiente" id="txt_pendiente" style="width: 700px; height: 30px" value="<%=tareas_pendientes%>"><%=tareas_pendientes%></textarea></div>	
 	</div>
 	<fieldset>
 		<legend>Desgloce de trabajo</legend>
@@ -143,13 +154,15 @@ if(fecha_certificada!=""&&hora_cargada!=""){
                  </div>
 	</fieldset>
 	<div class="row">
+            <div id="div_observaciones">
 		<div class="span2" style="text-align:right">Observaciones</div>
 		<div class="span6"><textarea name="txt_observacion" id="txt_observacion" style="width: 500px; height: 30px"></textarea></div>
+            </div>    
                 <div class="span4">Total $1000</div>
 	</div>	
 	<div class="row">
 	    <div class="span3" style="text-align:right" id="boton_guardar"><input type="button" class="btn btn-primary" value="Guardar" onclick="javascript:guardar_registro_avance(document.getElementById('accion').value)"></div>
-            <div class="span3" style="text-align:right" id="boton_avaces_previos"><a class="btn btn-default my-link" href="javascript: irAvancesPrevios(<%=poa%>)">Avances Previos</a></div>
+            <div class="span3" style="text-align:right" id="boton_avaces_previos"><a class="btn btn-default my-link" href="javascript: irAvancesPrevios(<%=poa%>,<%=cod_tipo_obra%>,<%=cod_zona%>)">Avances Previos</a></div>
 	</div>
 </fieldset>
 
