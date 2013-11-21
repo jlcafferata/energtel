@@ -18,25 +18,16 @@ if(accion==null){
 String fecha_certificada=request.getParameter("fecha_certificada");
 if(fecha_certificada==null){
 	fecha_certificada="";
-}else{
-    String dia=fecha_certificada.substring(0,2);
-    String mes=fecha_certificada.substring(2,4);
-    String anio=fecha_certificada.substring(4,8);
-    fecha_certificada=dia+"/"+mes+"/"+anio;
 }
 String hora_cargada=request.getParameter("hora_cargada");
 if(hora_cargada==null){
 	hora_cargada="";
-}else{
-    String hora=hora_cargada.substring(0,2);
-    String min=hora_cargada.substring(2,4);
-    String seg=hora_cargada.substring(4,6);
-    hora_cargada=hora+":"+min+":"+seg;
 }
 
 String fecha_completa_certificada="";
 if(fecha_certificada!=""&&hora_cargada!=""){
-    fecha_completa_certificada=fecha_certificada+" "+hora_cargada;
+    String fecha_alreves=fecha_certificada.substring(3,5)+"/"+fecha_certificada.substring(0,2)+"/"+fecha_certificada.substring(6,10);
+    fecha_completa_certificada=fecha_alreves+" "+hora_cargada;
 }
 
 %>
@@ -78,9 +69,11 @@ if(fecha_certificada!=""&&hora_cargada!=""){
                                                                         <div id="div_empleados" style="display: none;"><tag:ComboEmpleado nombreCombo="cbo_empleado"/><input class="btn  btn-primary" type="button" name="btn_ok_add_empleado" value="si" onclick="javascript:ok_add_empleado()"><input class="btn  btn-primary" type="button" name="btn_close_add_empleado" value="no" onclick="javascript:cancel_add_empleado()"></div></th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody>
-                                                              
-                                                            </tbody>                               
+                                                            
+                                                            <tbody id="empleados_tbody">
+                                                                <tag:GrillaEmpleadosAvancesPrevios poa="<%=poa%>" fecha_certificada="<%=fecha_certificada%>" hora_cargada="<%=hora_cargada%>" />
+                                                            </tbody>     
+                                                            
                                                         </table>
                                                   </div>                
 					</fieldset>
@@ -111,7 +104,7 @@ if(fecha_certificada!=""&&hora_cargada!=""){
 									</tr>
 								</thead>
 								<tbody>
-									
+                                                                    <tag:GrillaMaterialesAvancesPrevios poa="<%=poa%>" fecha_certificada="<%=fecha_certificada%>" hora_cargada="<%=hora_cargada%>" />
 								</tbody>
 							</table>
                                                  </div>                                        
@@ -144,7 +137,7 @@ if(fecha_certificada!=""&&hora_cargada!=""){
                                         </tr>
                                 </thead>
                                 <tbody>
-
+                                    <tag:GrillaTareasAvancesPrevios poa="<%=poa%>" fecha_certificada="<%=fecha_certificada%>" hora_cargada="<%=hora_cargada%>" />
                                 </tbody>
                         </table>
                  </div>
@@ -155,7 +148,7 @@ if(fecha_certificada!=""&&hora_cargada!=""){
                 <div class="span4">Total $1000</div>
 	</div>	
 	<div class="row">
-	    <div class="span3" style="text-align:right"><input type="button" class="btn btn-primary" value="Guardar" onclick="javascript:guardar_registro_avance(document.getElementById('accion').value)"></div>
+	    <div class="span3" style="text-align:right" id="boton_guardar"><input type="button" class="btn btn-primary" value="Guardar" onclick="javascript:guardar_registro_avance(document.getElementById('accion').value)"></div>
             <div class="span3" style="text-align:right" id="boton_avaces_previos"><a class="btn btn-default my-link" href="javascript: irAvancesPrevios(<%=poa%>)">Avances Previos</a></div>
 	</div>
 </fieldset>

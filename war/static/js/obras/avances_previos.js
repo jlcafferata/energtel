@@ -23,5 +23,6 @@ function filtrar(){
 
 function modificarAvancePrevio(fecha_certificada,hora_cargada){
     var poa=$("#txt_poa_avances_previos").val();
-    $('.modal-body').load("jsp/obras/registro_avance.jsp?poa="+poa+"&fecha_certificada="+fecha_certificada+"&hora_cargada="+hora_cargada+"&accion=MAO");
+    var fecha=fecha_to_db(fecha_certificada);
+    $('.modal-body').load("jsp/obras/registro_avance.jsp?poa="+poa+"&fecha_certificada="+fecha+"&hora_cargada="+hora_cargada+"&accion=MAO");
 }

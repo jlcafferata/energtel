@@ -25,6 +25,10 @@ function onload(){
             var hc=$("#hora_cargada").val();
             var poa=$("#txt_poa_ejecucion").val();
             llenarTablas(fc,hc,poa);
+            $("#boton_guardar").hide();
+            $("#div_button_add_tarea").hide();
+            $("#div_button_add_material").hide();
+            $("#div_button_add_empleado").hide();
         }
 
 }

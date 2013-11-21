@@ -563,7 +563,81 @@
                <rtexprvalue>true</rtexprvalue>
                <type>String</type>
           </attribute>
-    </tag>     
+    </tag>
+    <tag>
+          <name>GrillaEmpleadosAvancesPrevios</name>
+          <tag-class>org.isft.web.tags.TagGrillaEmpleadosAvancesPrevios</tag-class>
+          <body-content>empty</body-content>
+          <description>Tag with Parameter</description>
+          <attribute>
+               <name>poa</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+               <type>String</type>
+          </attribute>
+          <attribute>
+               <name>fecha_certificada</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+               <type>String</type>
+          </attribute>
+          <attribute>
+               <name>hora_cargada</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+               <type>String</type>
+          </attribute>
+    </tag>      
+    
+    <tag>
+          <name>GrillaMaterialesAvancesPrevios</name>
+          <tag-class>org.isft.web.tags.TagGrillaMaterialesAvancesPrevios</tag-class>
+          <body-content>empty</body-content>
+          <description>Tag with Parameter</description>
+          <attribute>
+               <name>poa</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+               <type>String</type>
+          </attribute>
+          <attribute>
+               <name>fecha_certificada</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+               <type>String</type>
+          </attribute>
+          <attribute>
+               <name>hora_cargada</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+               <type>String</type>
+          </attribute>
+    </tag>
+    
+    <tag>
+          <name>GrillaTareasAvancesPrevios</name>
+          <tag-class>org.isft.web.tags.TagGrillaTareasAvancesPrevios</tag-class>
+          <body-content>empty</body-content>
+          <description>Tag with Parameter</description>
+          <attribute>
+               <name>poa</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+               <type>String</type>
+          </attribute>
+          <attribute>
+               <name>fecha_certificada</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+               <type>String</type>
+          </attribute>
+          <attribute>
+               <name>hora_cargada</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+               <type>String</type>
+          </attribute>
+    </tag>
 
     	<tag>
             <name>ComboPartido</name>
