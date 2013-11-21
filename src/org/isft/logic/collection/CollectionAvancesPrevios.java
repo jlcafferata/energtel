@@ -28,9 +28,6 @@ public class CollectionAvancesPrevios extends AccessManager implements AccessInt
             }
             if(param!=null){
                     if(param.get("fecha")!=null && !param.get("fecha").equals("")){
-                            /*String aux_fecha=(String)param.get("fecha");
-                            String[] fecha_split=aux_fecha.split("-");
-                            String fecha=fecha_split[2]+"/"+fecha_split[1]+"/"+fecha_split[0];*/
                             sql+=" and fecha_certificacion=#" + (String)param.get("fecha")+"#";
                     }
             }

@@ -21,9 +21,7 @@ function filtrar(){
     }*/
 }
 
-function modificarAvancePrevio(fecha_certifiada,hora_cargada){
-    alert(fecha_certifiada);
-    alert(hora_cargada);
+function modificarAvancePrevio(fecha_certificada,hora_cargada){
     var poa=$("#txt_poa_avances_previos").val();
-    $('.modal-body').load("jsp/obras/registro_avance.jsp?poa="+poa+"&fecha_certificada="+fecha_certifiada+"&hora_cargada="+hora_cargada+"&accion=MAO");
+    $('.modal-body').load("jsp/obras/registro_avance.jsp?poa="+poa+"&fecha_certificada="+fecha_certificada+"&hora_cargada="+hora_cargada+"&accion=MAO");
 }

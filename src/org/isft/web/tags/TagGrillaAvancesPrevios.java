@@ -11,7 +11,7 @@ import static javax.servlet.jsp.tagext.Tag.EVAL_PAGE;
 import static javax.servlet.jsp.tagext.Tag.SKIP_BODY;
 import org.isft.domain.AvancePrevio;
 import org.isft.logic.collection.CollectionAvancesPrevios;
-
+import org.isft.domain.helper.FechaHora;
 /**
  *
  * @author Administrador
@@ -39,13 +39,11 @@ public class TagGrillaAvancesPrevios extends TagGrilla {
                 table+="<tr>";
                 table+="<th>"+vec.elementAt(i).getPoa()+"</th>";
                 String[] fecha=vec.elementAt(i).getFecha().split(" ");
-                table+="<th>"+fecha[0]+"</th>";
-                table+="<th>"+vec.elementAt(i).getHora()+"</th>";
-                
-                String[] fecha_split=fecha[0].split("-");
-                String fecha_mostrada=fecha_split[2]+"/"+fecha_split[1]+"/"+fecha_split[0];
-                String datos_metodo_modificar=fecha_mostrada.replaceAll("/", "")+","+vec.elementAt(i).getHora().replaceAll(":", "");
-                table+="<th><a href=\"javascript: modificarAvancePrevio("+datos_metodo_modificar+")\">Modificar</a></th>";
+                String fecha_mostrada=FechaHora.getFechaWithBarras(fecha[0]);
+                String hora_mostrada=vec.elementAt(i).getHora();
+                table+="<th>"+fecha_mostrada+"</th>";
+                table+="<th>"+hora_mostrada+"</th>";
+                table+="<th><a href=\"javascript: modificarAvancePrevio('"+fecha_mostrada.replaceAll("/","")+ "','"+ hora_mostrada.replaceAll(":","")+"')\">Modificar</a></th>";
                 table+="</tr>";
             }
             
