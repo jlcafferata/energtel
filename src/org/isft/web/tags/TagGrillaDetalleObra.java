@@ -72,7 +72,7 @@ public class TagGrillaDetalleObra extends TagGrilla {
 		           		table+="<td><a href=\"javascript: modi("+vec.get(i).getPoa()+")\">Editar</a>&nbsp;";
 									table+="<a href=\"javascript: iniciar_ejecucion("+vec.get(i).getPoa()+")\">Iniciar ejecuci&oacute;n</a></td>";	
 		           }else if(this.getPagina().equals("EJE")){
-		           		table+="<td><a href=\"javascript: anticipo_obra("+vec.get(i).getPoa()+")\">Anticipo obra</a>&nbsp;<a href=\"javascript: registro_avance("+vec.get(i).getPoa()+")\">Avance obra</a>&nbsp;<a href=\"javascript: certificar("+vec.get(i).getPoa()+")\">Certificar</a></td>";	
+		           		table+="<td><a href=\"javascript: anticipo_obra("+vec.get(i).getPoa()+")\">Anticipo obra</a>&nbsp;<a href=\"javascript: registro_avance("+vec.get(i).getPoa()+","+vec.get(i).getCod_zona()+","+vec.get(i).getCod_tipo_obra()+")\">Avance obra</a>&nbsp;<a href=\"javascript: certificar("+vec.get(i).getPoa()+")\">Certificar</a></td>";	
 		           }else if(this.getPagina().equals("CER")){
 		           		table+="<td><a href=\"javascript: pasar_a_en_ejecucion("+vec.get(i).getPoa()+")\">Volver En Ejecuci&oacute;n</a>&nbsp;<a href=\"javascript: facturar("+vec.get(i).getPoa()+")\">Pasar a facturada</a></td>";	
 		           }else if(this.getPagina().equals("FAC")){

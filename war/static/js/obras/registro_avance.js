@@ -25,6 +25,14 @@ function onload(){
             var hc=$("#hora_cargada").val();
             var poa=$("#txt_poa_ejecucion").val();
             llenarTablas(fc,hc,poa);
+            $("#boton_guardar").hide();
+            $("#div_button_add_tarea").hide();
+            $("#div_button_add_material").hide();
+            $("#div_button_add_empleado").hide();
+            $("#div_observaciones").hide();
+            $("#cbo_zona_obra_aejecucion").attr("disabled", "disabled");
+            $("#cbo_tipo_obra_aejecucion").attr("disabled", "disabled");
+            $("#txt_pendiente").attr("disabled", "disabled");
         }
 
 }
@@ -325,8 +333,8 @@ function pasarEjecucion(parametros){
     });
 }
 
-function irAvancesPrevios(poa){
-        $('.modal-body').load("jsp/obras/avances_previos.jsp?poa="+poa);
+function irAvancesPrevios(poa,cod_tipo_obra,cod_zona){
+        $('.modal-body').load("jsp/obras/avances_previos.jsp?poa="+poa+"&cod_tipo_obra="+cod_tipo_obra+"&cod_zona="+cod_zona);
 }
 
 function llenarTablas(fecha_certificada,hora_cargada,poa){

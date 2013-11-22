@@ -40,6 +40,7 @@ public class CollectionAvancesPrevios extends AccessManager implements AccessInt
                 value.setFecha(rst.getString("fecha_certificacion"));
                 value.setHora(rst.getString("hora_carga"));
                 value.setPoa(rst.getString("poa"));
+                value.setTareas_pendientes(rst.getString("tareas_pendientes"));
                 vec.add(value);
             }             
         }catch(Exception exc){

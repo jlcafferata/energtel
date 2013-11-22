@@ -39,11 +39,11 @@ public class TagGrillaAvancesPrevios extends TagGrilla {
                 table+="<tr>";
                 table+="<th>"+vec.elementAt(i).getPoa()+"</th>";
                 String[] fecha=vec.elementAt(i).getFecha().split(" ");
-                String fecha_mostrada=FechaHora.getFechaWithBarras(fecha[0]);
+                String fecha_mostrada=fecha[0];
                 String hora_mostrada=vec.elementAt(i).getHora();
                 table+="<th>"+fecha_mostrada+"</th>";
                 table+="<th>"+hora_mostrada+"</th>";
-                table+="<th><a href=\"javascript: modificarAvancePrevio('"+fecha_mostrada.replaceAll("/","")+ "','"+ hora_mostrada.replaceAll(":","")+"')\">Modificar</a></th>";
+                table+="<th><a href=\"javascript: modificarAvancePrevio('"+fecha_mostrada+ "','"+ hora_mostrada+"','"+vec.get(i).getTareas_pendientes()+"')\">Modificar</a></th>";
                 table+="</tr>";
             }
             
