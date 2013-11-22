@@ -115,9 +115,13 @@ public class AbmObra extends UpdaterManager implements UpdaterInterface{
             }
             if((String)param.get("fecha_cierre")!=""){
                 campos+=", fecha_cierre= '"+(String)param.get("fecha_cierre")+"'";
+            }else{
+                campos+=", fecha_cierre=null";
             }
             if((String)param.get("fecha_certificacion_presupuestada")!=""){
                 campos+=", fecha_certificacion= '"+(String)param.get("fecha_certificacion_presupuestada")+"'";
+            }else{
+                campos+=", fecha_certificacion=null";
             }
             if((String)param.get("zona_obra_alta")!=""){
                 campos+=", cod_zona= "+(String)param.get("zona_obra_alta");
@@ -142,6 +146,8 @@ public class AbmObra extends UpdaterManager implements UpdaterInterface{
             }
             if((String)param.get("fecha_pago")!=""){
                 campos+=", fecha_facturacion= '"+(String)param.get("fecha_pago")+"'";
+            } else{
+                campos+=", fecha_facturacion=null";
             }
             if((String)param.get("nro_orden_compra_presupuestada")!=""){
                 campos+=", orden_compra= "+(String)param.get("nro_orden_compra_presupuestada");

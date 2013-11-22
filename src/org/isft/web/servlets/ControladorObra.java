@@ -123,6 +123,9 @@ public class ControladorObra  extends HttpServlet {
             if(accion.equals("IE")){//INICIAR EJECUCION
                     abm.iniciarEjecucion(param);
             }
+            if(accion.equals("M")){
+                abm.update(param);
+            }
         } 
         catch(ServletException exc){
                 throw new ServletException(exc.getMessage());

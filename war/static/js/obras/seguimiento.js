@@ -42,7 +42,7 @@ function guardar(accion, modalidad){
 				estado='EJE';
 		}
 		    
-		if(modalidad=='A'){//alta
+	  if(modalidad=='A'){//alta
 			confirmar_alta(estado);
 	  } else if(modalidad=='M'){ //modificacion
 	  	confirmar_modificacion(estado);
@@ -174,49 +174,84 @@ function evaluar_pasaje_por_fecha(estado){
     
     var pasar_a=estado;
      
-	  if(txt_fecha_certificacion!=''){
-					if(confirm('Ha ingresado fecha de CERTIFICACION. La obra va a moverse  a CERTIFICADA. Desea continuar?')){
-						pasar_a='CER';				
-					}else{
-						pasar_a='';
-					}
-		} else{ 
-				if(txt_fecha_cierre!=''){
-					if(!confirm('Ha ingresado fecha de CIERRE. Confirma establecerla en este momento?')){
-						pasar_a='';
-					}
-				} else{
-					if(txt_fecha_pago!=''){
-						if(confirm('Ha ingresado fecha de PAGO. La obra va a moverse a COBRADA. Desea continuar?')){
-							pasar_a='COB';
+	  if(txt_fecha_pago!=''){
+			if(confirm('Ha ingresado fecha de PAGO. La obra va a moverse a FACTURADA. Desea continuar?')){
+				pasar_a='FAC';
+			}else{
+				pasar_a='';
+			}
+	  } else{
+		  if(txt_fecha_certificacion!=''){
+						if(confirm('Ha ingresado fecha de CERTIFICACION. La obra va a moverse  a CERTIFICADA. Desea continuar?')){
+							pasar_a='CER';				
 						}else{
 							pasar_a='';
 						}
-					} else{
-						if(txt_fecha_inicio!=''){
-							if(confirm('Ha ingresado fecha de INICIO. La obra va a moverse a EN EJECUCION. Desea continuar?')){
-								pasar_a='EJE';				
-							} else{
-									pasar_a='';
-							}
+			} else{ 
+					if(txt_fecha_cierre!=''){
+						if(!confirm('Ha ingresado fecha de CIERRE. Confirma establecerla en este momento?')){
+							pasar_a='';
 						}
+					} else{
+						   if(txt_fecha_inicio!=''){
+								if(confirm('Ha ingresado fecha de INICIO. La obra va a moverse a EN EJECUCION. Desea continuar?')){
+									pasar_a='EJE';				
+								} else{
+										pasar_a='';
+								}
+						   }
 					}
-				}
+		   }
 	  }
   	
   	return pasar_a;
 }
 
+function validar_fechas_por_estado(estado){
+	var txt_fecha_inicio=    	  $("#txt_fecha_alta_presupuestada").val(),       
+        txt_fecha_cierre=     	$("#txt_fecha_cierre_presupuestada").val(),     
+        txt_fecha_certificacion=$("#txt_fecha_certificacion_presupuestada").val(),       
+        txt_fecha_pago=					$("#txt_fecha_pago").val();
+    
+    if(typeof(txt_fecha_inicio)=='undefined'){
+    	txt_fecha_inicio='';
+    }
+    if(typeof(txt_fecha_certificacion)=='undefined'){
+    	txt_fecha_certificacion='';
+    }
+    if(typeof(txt_fecha_cierre)=='undefined'){
+    	txt_fecha_cierre='';
+    }
+    if(typeof(txt_fecha_pago)=='undefined'){
+    	txt_fecha_pago='';
+    }
+	
+	if(estado=='FAC' && txt_fecha_pago==''){
+		alert('Debe ingresar fecha de pago para cambiar a estado FACTURADO');
+		return false;
+	}
+	if(estado=='CER' && txt_fecha_certificacion==''){
+		alert('Debe ingresar fecha de certificacion para cambiar a estado CERTICADO');
+		return false;
+	}
+	
+	return true;
+	
+}
+
 function confirmar_modificacion(estado){
-	  if(!validar_datos()){
-        return false;
+	if(!validar_datos()){
+       return false;
     }    
+    if(!validar_fechas_por_estado(estado)){
+		return false;
+	}
+	  
+	estado=evaluar_pasaje_por_fecha(estado);
 		
-		estado=evaluar_pasaje_por_fecha(estado);
-		
-		if(estado==''){
-			return false;
-		}
+	if(estado==''){
+		return false;
+	}
 		
     var parametros={
         accion: 'M',
@@ -245,7 +280,9 @@ function confirmar_alta(estado){
     if(!validar_datos()){
         return false;
     }    
-
+ 	if(!validar_fechas_por_estado(estado)){
+		return false;
+	}
     var parametros={
         accion: 'A',
         poa_alta:                       $("#txt_poa_alta").val(), 
@@ -263,7 +300,7 @@ function confirmar_alta(estado){
         nro_orden_compra_presupuestada: $("#txt_nro_orden_compra_presupuestada").val(),     
         valor_orden_compra_presupuestada: $("#txt_valor_orden_compra_presupuestada").val(), 
         observacion_presupuestadas:     $("#txt_observacion_presupuestadas").val(),
-        estado:													estado  
+        estado:							estado  
     };
     console.log(parametros);
     grabar(parametros);    		
@@ -277,7 +314,7 @@ function grabar(parametros){
       url: 'manager.obra',
       data: parametros,
       success: function(response){
-           if(response.substring(0,5)=='ERROR' && parametros.accion=="A"){
+           if(response.substring(0,5)=='ERROR' && (parametros.accion=="A" || parametros.accion=="M")){
                 Notifier.warning(response.substring(6));
            }else{    
                 Notifier.success('\n ' + (parametros.accion=="A"? 'Alta': 'Modificacion') + ' de la obra efectuada con exitoso ');
