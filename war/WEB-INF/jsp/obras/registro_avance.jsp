@@ -1,3 +1,4 @@
+<%@page import="org.isft.logic.collection.CollectionDetalleObra, java.util.HashMap, java.util.Vector, org.isft.domain.DetalleObra"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -38,7 +39,14 @@ String fecha_completa_certificada="";
 if(fecha_certificada!=""&&hora_cargada!=""){
     fecha_completa_certificada=fecha_certificada+" "+hora_cargada;
 }
-
+DetalleObra obra=new DetalleObra();
+if(!poa.equals("")){
+HashMap param=new HashMap();
+param.put("poa", poa);
+CollectionDetalleObra collection=new CollectionDetalleObra();
+Vector<DetalleObra> vecObra=collection.select(param);
+obra=vecObra.get(0);
+}
 %>
 <body>   
 <input type="hidden" id="accion" value="<%=accion%>"/>
@@ -51,13 +59,13 @@ if(fecha_certificada!=""&&hora_cargada!=""){
 		<div class="span3" style="text-align:right">POA/OT</div>
 		<div class="span3"><input name="txt_poa" id="txt_poa_ejecucion" style="width:80px" type="text" value="<%=poa%>" disabled/></div>
 		<div class="span3" style="text-align:right">Tipo obra</div>
-		<div class="span3"><tag:ComboTipoObra nombreCombo="cbo_tipo_obra_aejecucion"/></div>
+		<div class="span3"><tag:ComboTipoObra nombreCombo="cbo_tipo_obra_aejecucion" selecto="<%=obra.getCod_tipo_obra()%>"/></div>
 	</div>
 	<div class="row">
 		<div class="span3" style="text-align:right">Zona</div>
-		<div class="span3"><tag:ComboZona nombreCombo="cbo_zona_obra_aejecucion"/></div>
+		<div class="span3"><tag:ComboZona nombreCombo="cbo_zona_obra_aejecucion" selecto="<%=obra.getCod_zona()%>"/></div>
 		<div class="span1" style="display: none;">Fecha inicio</div>
-		<div class="span2" style="display: none;"><input type="text" id="txt_fecha_inicio" style="width:120px"/></div>
+		<div class="span2" style="display: none;"><input type="text" id="txt_fecha_inicio" style="width:120px" value="<%=obra.getFecha_inicio()%>"/></div>
 		<div class="span3" style="text-align:right">Fecha certificacion</div>
 		<div class="span3" id="div_combo_fecha_certificacion"><input type="text" id="txt_fecha_certificacion" style="width:120px"/></div>
                 <div class="span3" id="div_txt_fecha_certificacion" style="display:none"><input type="text" id="txt_fecha_certificacion" style="width:160px" value="<%=fecha_completa_certificada%>" disabled/></div>
@@ -152,7 +160,7 @@ if(fecha_certificada!=""&&hora_cargada!=""){
 	<div class="row">
 		<div class="span2" style="text-align:right">Observaciones</div>
 		<div class="span6"><textarea name="txt_observacion" id="txt_observacion" style="width: 500px; height: 30px"></textarea></div>
-                <div class="span4">Total $1000</div>
+                Total $<div class="span4" id="div_total"></div>
 	</div>	
 	<div class="row">
 	    <div class="span3" style="text-align:right"><input type="button" class="btn btn-primary" value="Guardar" onclick="javascript:guardar_registro_avance(document.getElementById('accion').value)"></div>

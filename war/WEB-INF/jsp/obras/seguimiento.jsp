@@ -28,10 +28,12 @@ param.put("poa", poa);
 DetalleObra detalleObra=new DetalleObra();
 
 if(!accion.equals("")){
-	CollectionDetalleObra detallesObra=new CollectionDetalleObra();
-	Vector<DetalleObra> vec=detallesObra.select(param);
-	if(vec.size()>0){
-		detalleObra=vec.get(0);
+	if(!poa.equals("")){
+		CollectionDetalleObra detallesObra=new CollectionDetalleObra();
+		Vector<DetalleObra> vec=detallesObra.select(param);
+		if(vec.size()>0){
+			detalleObra=vec.get(0);
+		}
 	}
 }
 %>
@@ -48,7 +50,7 @@ if(!accion.equals("")){
 	<div class="row">
 		<div class="span2" style="text-align:right">Fecha inicio obra</div>
 		<div class="span3"><input name="txt_fecha_alta_alta" id="txt_fecha_alta_presupuestada" type="text" value="<%=FechaHora.getFechaView(detalleObra.getFecha_inicio())%>"  
-		<%if(detalleObra.getEstado()!=null && !detalleObra.getEstado().equals("PRE")){%> disabled <%}%>/></div>
+		<%if(detalleObra.getEstado()!=null && !detalleObra.getEstado().equals("") && !detalleObra.getEstado().equals("PRE")){%> disabled <%}%>/></div>
 		<div class="span2" style="text-align:right">Fecha cierre obra</div>
 		<div class="span3"><input name="txt_fecha_cierre" id="txt_fecha_cierre_presupuestada" type="text" value="<%=FechaHora.getFechaView(detalleObra.getFecha_cierre())%>"/></div>
 	</div>

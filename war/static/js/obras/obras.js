@@ -88,3 +88,7 @@ function modi(poa){
 	$('.modal-body').load("jsp/obras/seguimiento.jsp?accion=alta&poa="+poa+"&modalidad=M");
 	$('#myModal').modal('show');
 }
+
+function anticipo_obra(poa){
+	alert('Anticipo de obra poa:' + poa);
+}
