@@ -2,7 +2,7 @@ function filtrar(){
 	var zona=$("#cbo_zona_obra").val();
 	var tipo_obra=$("#cbo_tipo_obra").val();
 	var poa=$("#txt_poa").val();
-	var path='4001';
+	var path='4003';
 	if(zona && zona!=''){
 		path+='&cbo_zona_obra='+zona;
 	}
@@ -35,15 +35,17 @@ function facturar(poa){
 }
 
 function cobrar(poa){
-	$('.modal-body').load("jsp/obras/seguimiento.jsp?accion=cobrar&poa="+poa+"&modalidad=M");
+	$('.modal-body').load("jsp/obras/seguimiento.jsp?accion=cobrar&modalidad=A");
 	$('#myModal').modal('show');
 }
 
 
 
+
 function pasar_a_en_ejecucion(poa){
 	if(confirm('Desea pasar a EN EJECUCION la POA ' + poa + '?')){
-		guardar('iniciar');
+		$('.modal-body').load("jsp/obras/seguimiento.jsp?accion=iniciar&poa="+poa+"&modalidad=M");
+		$('#myModal').modal('show');
 	}
 }
 
