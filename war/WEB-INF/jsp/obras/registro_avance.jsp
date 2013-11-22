@@ -61,19 +61,12 @@ obra=vecObra.get(0);
 		<div class="span3" style="text-align:right">POA/OT</div>
 		<div class="span3"><input name="txt_poa" id="txt_poa_ejecucion" style="width:80px" type="text" value="<%=poa%>" disabled/></div>
 		<div class="span3" style="text-align:right">Tipo obra</div>
-<<<<<<< HEAD
+
 		<div class="span3"><tag:ComboTipoObra nombreCombo="cbo_tipo_obra_aejecucion" selecto="<%=obra.getCod_tipo_obra()%>"/></div>
 	</div>
 	<div class="row">
 		<div class="span3" style="text-align:right">Zona</div>
 		<div class="span3"><tag:ComboZona nombreCombo="cbo_zona_obra_aejecucion" selecto="<%=obra.getCod_zona()%>"/></div>
-=======
-		<div class="span3"><tag:ComboTipoObra nombreCombo="cbo_tipo_obra_aejecucion" selecto="<%=cod_tipo_obra%>"/></div>
-	</div>
-	<div class="row">
-		<div class="span3" style="text-align:right">Zona</div>
-		<div class="span3"><tag:ComboZona nombreCombo="cbo_zona_obra_aejecucion" selecto="<%=cod_zona%>"/></div>
->>>>>>> 8542be530b1ac3ed5a13dcb41b05bc47adc5cf85
 		<div class="span1" style="display: none;">Fecha inicio</div>
 		<div class="span2" style="display: none;"><input type="text" id="txt_fecha_inicio" style="width:120px" value="<%=obra.getFecha_inicio()%>"/></div>
 		<div class="span3" style="text-align:right">Fecha certificacion</div>
@@ -173,12 +166,7 @@ obra=vecObra.get(0);
             <div id="div_observaciones">
 		<div class="span2" style="text-align:right">Observaciones</div>
 		<div class="span6"><textarea name="txt_observacion" id="txt_observacion" style="width: 500px; height: 30px"></textarea></div>
-<<<<<<< HEAD
                 Total $<div class="span4" id="div_total"></div>
-=======
-            </div>    
-                <div class="span4">Total $1000</div>
->>>>>>> 8542be530b1ac3ed5a13dcb41b05bc47adc5cf85
 	</div>	
 	<div class="row">
 	    <div class="span3" style="text-align:right" id="boton_guardar"><input type="button" class="btn btn-primary" value="Guardar" onclick="javascript:guardar_registro_avance(document.getElementById('accion').value)"></div>
