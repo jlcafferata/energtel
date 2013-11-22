@@ -144,6 +144,7 @@ obra=vecObra.get(0);
                                         <tr>
                                                 <th > Tarea </th>
                                                 <th> Cantidad</th>
+                                                <th> Precio </th>
                                                 <th> 
                                                     <div id="div_button_add_tarea">
                                                         <input class="btn  btn-primary"   type="button" name="btn_agregar_tarea" value="+" style="height:20px" onclick="javascript:ver_tarea()"/>
@@ -163,11 +164,14 @@ obra=vecObra.get(0);
                  </div>
 	</fieldset>
 	<div class="row">
-            <div id="div_observaciones">
+            <div id="div_observaciones" class="span8">
 		<div class="span2" style="text-align:right">Observaciones</div>
-		<div class="span6"><textarea name="txt_observacion" id="txt_observacion" style="width: 500px; height: 30px"></textarea></div>
-                Total $<div class="span4" id="div_total"></div>
-	</div>	
+		<div class="span6"><textarea name="txt_observacion" id="txt_observacion" style="width: 500px; height: 30px"></textarea></div> 
+            </div>	
+            <div class="span1"><h5>Total $</h5></div>
+            <div id="div_total" class="span3"><input type="text" id="precio_total" value="0" disabled></input></div>
+            
+        </div>    
 	<div class="row">
 	    <div class="span3" style="text-align:right" id="boton_guardar"><input type="button" class="btn btn-primary" value="Guardar" onclick="javascript:guardar_registro_avance(document.getElementById('accion').value)"></div>
             <div class="span3" style="text-align:right" id="boton_avaces_previos"><a class="btn btn-default my-link" href="javascript: irAvancesPrevios(<%=poa%>,<%=cod_tipo_obra%>,<%=cod_zona%>)">Avances Previos</a></div>

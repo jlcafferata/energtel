@@ -26,7 +26,7 @@ public class TagComboTarea extends TagCombo{
             for(int i=0; i<vec.size(); i++){
                 selected="";
                 Tarea value= vec.get(i);	
-                pageContext.getOut().print("<option value=\""+value.getCod_tarea()+"\">"+value.getDescripcion()+"</option>\n");
+                pageContext.getOut().print("<option value=\""+value.getCod_tarea()+"_"+value.getPrecio()+"\">"+value.getDescripcion()+"</option>\n");
             }
  		} catch(Exception exc){
             exc.printStackTrace();

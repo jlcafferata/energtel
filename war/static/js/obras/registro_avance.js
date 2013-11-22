@@ -33,7 +33,14 @@ function onload(){
             $("#cbo_zona_obra_aejecucion").attr("disabled", "disabled");
             $("#cbo_tipo_obra_aejecucion").attr("disabled", "disabled");
             $("#txt_pendiente").attr("disabled", "disabled");
+            if($("#hid_cant_tareas").val()=='0'){
+                $("#precio_total").val(0);
+            }else{
+                calcular_total();
+            }
+            
         }
+        
 
 }
 function ver_empleados(){
@@ -110,10 +117,11 @@ function ver_tarea(){
 }
 
 function ok_add_tarea(){
-    var mensaje='';
-        var cod_tarea=$("#cbo_tarea").val();
+        var mensaje='';
+        var aux_tarea=$("#cbo_tarea").val().split("_");
+        var cod_tarea=aux_tarea[0];
+        var precio=aux_tarea[1];
         var tarea_nombre=$('#cbo_tarea :selected').text();
-        var tarea_descripcion=$('#cbo_tarea :selected').attr('name');
         
         if(tarea_nombre==''){
             mensaje+='* Debe seleccionar una tarea \n';
@@ -127,8 +135,14 @@ function ok_add_tarea(){
             alert(mensaje);
             return false;
         } else{
-            $('#tabla_tareas > tbody:last').append("<tr id='tarea_"+cod_tarea+"'><td>"+tarea_nombre+"</td><td><input name='txt_"+tarea_nombre+"' id='txt_"+tarea_nombre+"' style='width:70px' type='text'></td><td><a href=\"javascript:\" onclick=\"quitarTarea(tarea_"+cod_tarea+");\">Quitar</a></td></tr>");
+            $('#tabla_tareas > tbody:last').append("<tr id='tarea_"+cod_tarea+"'><td>"+tarea_nombre+"</td><td><input name='txt_tarea_"+cod_tarea+"' id='txt_tarea_"+cod_tarea+"' style='width:70px' type='text'></td><td>"+precio+"</td><td><a href=\"javascript:\" onclick=\"quitarTarea(tarea_"+cod_tarea+");calcular_total();\">Quitar</a></td></tr>");
         }
+
+        $('#txt_tarea_'+cod_tarea).change(function() {
+            calcular_total();
+        });
+        
+        
 	$("#div_button_add_tarea").show();
 	$("#div_tarea").hide("slow");
 }
@@ -341,4 +355,24 @@ function llenarTablas(fecha_certificada,hora_cargada,poa){
     $("#div_txt_fecha_certificacion").show();
     $("#div_combo_fecha_certificacion").hide();
     $("#txt_fecha_certificacion").val('valor');
+}
+
+function calcular_total(){
+    $("#precio_total").val(0);
+    var mensaje="";
+    $("#tabla_tareas tbody tr").each(function () {
+                 var precio=$(this).children("td").eq(2).text();
+                 var aux_cantidad="txt_"+$(this).attr('id');
+                 var cantidad=$("#"+aux_cantidad).val();
+                 if(cantidad<0){
+                     mensaje="* Se encontro un valor que es menor a 0 \n";
+                 }
+                 var incrementar=parseInt(cantidad*precio);
+                 var aux_precio_total=parseInt($("#precio_total").val());
+                 $("#precio_total").val(aux_precio_total+incrementar);
+    }); 
+    if(mensaje!=''){
+        alert(mensaje);
+        $("#precio_total").val(0);
+    }
 }

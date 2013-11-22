@@ -31,12 +31,14 @@ public class TagGrillaTareasAvancesPrevios extends TagSupport{
                 param.put("hora_cargada", hora_cargada);
                 Vector<TareaAvancePrevio> vec=cap.select(param);
                 if(vec.size()==0){
+                    tabla+="<input type=\"hidden\" id=\"hid_cant_tareas\" value=\"0\">";
                     tabla+="<tr class=\"warning\"><td colspan=\"3\" align=\"center\">No se encontraron tareas realizadas</td></tr>";
                 }
                 for(int i=0;i<vec.size();i++){
-                    tabla+="<tr id='tarea_"+vec.get(i).getCod_tarea()+"'><td>"+vec.get(i).getDescripcion()+"</td><td><input name='txt_"+vec.get(i).getDescripcion()+"' id='txt_"+vec.get(i).getDescripcion()+"' style='width:70px' type='text' value='"+vec.get(i).getValor()+"' disabled></td><td> "+/*<a href=\"javascript:\" onclick=\"quitarTarea(tarea_"+vec.get(i).getCod_tarea()+");\">Quitar</a>*/"</td></tr>";
+                    tabla+="<tr id='tarea_"+vec.get(i).getCod_tarea()+"'><td>"+vec.get(i).getDescripcion()+"</td><td><input name='txt_tarea_"+vec.get(i).getCod_tarea()+"' id='txt_tarea_"+vec.get(i).getCod_tarea()+"' style='width:70px' type='text' value='"+vec.get(i).getValor()+"' disabled><td>"+vec.get(i).getPrecio()+"</td></td><td> "+/*<a href=\"javascript:\" onclick=\"quitarTarea(tarea_"+vec.get(i).getCod_tarea()+");\">Quitar</a>*/"</td></tr>";
                 } 
             }
+            
             pageContext.getOut().print(tabla);
         } catch(Exception exc){
             exc.printStackTrace();
