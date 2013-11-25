@@ -367,6 +367,12 @@
 				      <type>String</type>
 		      </attribute>  
           <attribute>
+	            <name>style</name>
+		     			<required>false</required>
+				      <rtexprvalue>true</rtexprvalue>
+				      <type>String</type>
+		      </attribute>  
+          <attribute>
                <name>codigo</name>
                <required>false</required>
                <rtexprvalue>true</rtexprvalue>
@@ -389,6 +395,12 @@
 		 <required>false</required>
 		 <rtexprvalue>true</rtexprvalue>
 		 <type>String</type>
+          </attribute>
+          <attribute>
+                   <name>onChange</name>
+                   <required>false</required>
+                   <rtexprvalue>true</rtexprvalue>
+                   <type>String</type>
           </attribute>
 	</tag>
 	<tag>
@@ -444,6 +456,12 @@
 				      <rtexprvalue>true</rtexprvalue>
 				      <type>String</type>
 		      </attribute>  
+		      <attribute>
+                   <name>onChange</name>
+                   <required>false</required>
+                   <rtexprvalue>true</rtexprvalue>
+                   <type>String</type>
+          </attribute>
 	</tag>
         <tag>
         <name>ComboEmpleado</name>
@@ -455,6 +473,12 @@
 				      <rtexprvalue>true</rtexprvalue>
 				      <type>String</type>
 		      </attribute> 
+		      <attribute>
+                   <name>onChange</name>
+                   <required>false</required>
+                   <rtexprvalue>true</rtexprvalue>
+                   <type>String</type>
+          </attribute>
 	</tag>
 	 <tag>
           <name>GrillaDetalleObra</name>

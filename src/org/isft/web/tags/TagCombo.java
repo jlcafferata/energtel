@@ -10,10 +10,12 @@ public class TagCombo extends TagSupport {
     private String onClick="";
     private String nombreCombo="";
     private String selecto;
+    private String style;
+    
     
     public int doStartTag() throws JspException {
         try {
-            pageContext.getOut().print("<select id=\""+ getNombreCombo() + "\"  name=\""+getNombreCombo() + "\""  + (getDisabled()?"disabled":"") + " onClick='" + getOnClick() + "' onChange='" + getOnChange() + "'>\n");
+            pageContext.getOut().print("<select id=\""+ getNombreCombo() + "\"  name=\""+getNombreCombo() + "\""  + (getDisabled()?"disabled":"") + " onClick='" + getOnClick() + "' onChange='" + getOnChange() + "' " + getStyle() + ">\n");
             if(getObligatorio().equals("N")){
               pageContext.getOut().print("<option value=\"\"></option>\n");
             }
@@ -34,7 +36,18 @@ public class TagCombo extends TagSupport {
         return EVAL_PAGE;
     }
 
-      
+    public void setStyle(String style){
+        this.style=style;
+    }
+
+    public String getStyle(){
+ 				String estilo="";
+ 				if(this.style!=null){
+ 					estilo="style='"+this.style+"'";
+ 				}
+ 				return estilo;
+    }
+    
     public void setDisabled(boolean disabled){
         this.disabled=disabled;
     }

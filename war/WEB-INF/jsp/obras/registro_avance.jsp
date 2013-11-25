@@ -75,7 +75,7 @@ obra=vecObra.get(0);
 	</div>
 	<table width="100%">
 		<tr>
-			<td width="50%">
+			<td width="43%">
 					<fieldset>
 						<legend>Grupo de trabajo</legend>
                                                      <div style="height: 150px; overflow: auto;">
@@ -85,8 +85,8 @@ obra=vecObra.get(0);
                                                                     <th>Apellido</th>
                                                                     <th>Nombre</th>
                                                                     <th>
-                                                                        <div id="div_button_add_empleado"><input class="btn  btn-primary" type="button" name="btn_agregar_empleado" value="+" style="height:20px" onclick="javascript:ver_empleados()"></div>
-                                                                        <div id="div_empleados" style="display: none;"><tag:ComboEmpleado nombreCombo="cbo_empleado"/><input class="btn  btn-primary" type="button" name="btn_ok_add_empleado" value="si" onclick="javascript:ok_add_empleado()"><input class="btn  btn-primary" type="button" name="btn_close_add_empleado" value="no" onclick="javascript:cancel_add_empleado()"></div></th>
+                                                                        <div id="div_button_add_empleado"><input class="btn  btn-primary" type="button" name="btn_agregar_empleado" value="+" style="padding:0px 10px; font-size:9px; height:19px;" onclick="javascript:ver_empleados()"></div>
+                                                                        <div id="div_empleados" style="display: none;"><tag:ComboEmpleado nombreCombo="cbo_empleado" onChange="javascript:ok_add_empleado()"/><input class="btn  btn-primary" type="button" name="btn_close_add_empleado" value="x" style="padding:0px 10px; font-size:9px; height:19px;" onclick="javascript:cancel_add_empleado()"></div></th>
                                                                 </tr>
                                                             </thead>
                                                             
@@ -99,7 +99,7 @@ obra=vecObra.get(0);
 					</fieldset>
 				</td>
 				<td>&nbsp;&nbsp;&nbsp;</td>
-				<td width="50%">
+				<td width="57%">
 					<fieldset>
 						<legend>Materiales</legend>
                                                  <div style="height: 150px; overflow: auto;">
@@ -107,18 +107,16 @@ obra=vecObra.get(0);
 								<thead>
 									<tr>
 										<th> Material</th>
-                                                                                <th> Cantidad propio</th>
-										<th> Stock propio </th>
-                                                                                <th> Cantidad provisto</th>
+                                                                                <th> Cant.propio</th>
+										                                        <th> Stock propio </th>
+                                                                                <th> Cant. provisto</th>
                                                                                 <th> Stock Provisto</th>
 										<th> 
                                                                                     <div id="div_button_add_material">
-                                                                                        <input class="btn  btn-primary"   type="button" name="btn_agregar_material" value="+" style="height:20px" onclick="javascript:ver_materiales()"/>
+                                                                                        <input class="btn  btn-primary"   type="button" name="btn_agregar_material" value="+" style="padding:0px 10px; font-size:9px; height:19px;" onclick="javascript:ver_materiales()"/>
                                                                                     </div>
                                                                                     <div id="div_materiales" style="display:none">
-                                                                                        <tag:ComboMaterial nombreCombo="cbo_materiales"/>
-                                                                                        <input class="btn  btn-primary"   type="button" name="btn_ok_add_material" value="si" onclick="javascript:ok_add_material()"/>
-                                                                                        <input class="btn  btn-primary"   type="button" name="btn_close_add_material" value="no" onclick="javascript:cancel_add_material()"/>
+                                                                                        <tag:ComboMaterial nombreCombo="cbo_materiales" onChange="javascript:ok_add_material()" style="width:150px"/><input class="btn  btn-primary"   type="button" name="btn_close_add_material" value="x" style="padding:0px 10px; font-size:9px; height:19px;" onclick="javascript:cancel_add_material()"/>
                                                                                     </div>    
                                                                                 </th> 
 									</tr>
@@ -147,12 +145,11 @@ obra=vecObra.get(0);
                                                 <th> Precio </th>
                                                 <th> 
                                                     <div id="div_button_add_tarea">
-                                                        <input class="btn  btn-primary"   type="button" name="btn_agregar_tarea" value="+" style="height:20px" onclick="javascript:ver_tarea()"/>
+                                                        <input class="btn  btn-primary"   type="button" name="btn_agregar_tarea" value="+" style="padding:0px 10px; font-size:9px; height:19px;" onclick="javascript:ver_tarea()"/>
                                                     </div>
                                                     <div id="div_tarea" style="display:none">
-                                                        <tag:ComboTarea nombreCombo="cbo_tarea"/>
-                                                        <input class="btn  btn-primary"   type="button" name="btn_ok_add_tarea" value="si" onclick="javascript:ok_add_tarea()"/>
-                                                        <input class="btn  btn-primary"   type="button" name="btn_close_add_tarea" value="no" onclick="javascript:cancel_add_tarea()"/>
+                                                        <tag:ComboTarea nombreCombo="cbo_tarea" onChange="javascript:ok_add_tarea()"/>
+                                                        <input class="btn  btn-primary"   type="button" name="btn_close_add_tarea" value="x" style="padding:0px 10px; font-size:9px; height:19px;" onclick="javascript:cancel_add_tarea()"/>
                                                     </div>    
                                                 </th> 
                                         </tr>

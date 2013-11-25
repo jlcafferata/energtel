@@ -128,7 +128,7 @@ function ok_add_tarea(){
         }
         
         if(estaTareaAgregada(tarea_nombre)){
-            mensaje+='* El material ya esta en la lista \n';
+            mensaje+='* La tarea ya esta en la lista \n';
         }
         
         if(mensaje!=''){
@@ -247,6 +247,7 @@ function guardar_registro_avance(accion){
                          }
                          // TOMA LOS VALORES DE STOCK PROPIO
                          var aux_tarea="txt_"+$(this).children("td").eq(0).text();
+                         alert(aux_tarea);
                          var cant_tarea_realizada=$("#"+aux_tarea).val();
                          if(cant_tarea_realizada=='' || cant_tarea_realizada=='undefined'){cant_tarea_realizada="0";}
                          var id_tarea=$(this).attr('id').split('_');
@@ -299,26 +300,26 @@ function validar_datos(){
         
         // RELACION ENRE TAREAS PENDIENTE Y CERTIFICACION
         if(txt_pendiente!='' && txt_fecha_certificacion==''){
-            mensaje+='* Debe elejir una fecha de certificacion \n';
+            mensaje+='* Debe elegir una fecha de certificacion \n';
         }
         
         // RELACION ENTRE EMPLEADOS Y TAREAS CON CERTIFICACION
         if(empleados !=''){
-            if(txt_fecha_certificacion==''){mensaje+='* Debe elejir una fecha de certificacion \n';}    
+            if(txt_fecha_certificacion==''){mensaje+='* Debe elegir una fecha de certificacion \n';}    
         }
         if(tareas!=''){
-            if(empleados == ''){mensaje+='* Debe elejir por lo menos un empleado \n';}
-            if(txt_fecha_certificacion==''){mensaje+='* Debe elejir una fecha de certificacion \n';}
+            if(empleados == ''){mensaje+='* Debe elegir por lo menos un empleado \n';}
+            if(txt_fecha_certificacion==''){mensaje+='* Debe elegir una fecha de certificacion \n';}
         }
         if(materiales!=''){
-            if(tareas==''){mensaje+='* Debe elejir por lo menos una tarea \n';}
-            if(txt_fecha_certificacion==''){mensaje+='* Debe elejir una fecha de certificacion \n';}
-            if(empleados== ''){mensaje+='* Debe elejir por lo menos un empleado \n';}
+            if(tareas==''){mensaje+='* Debe elegir por lo menos una tarea \n';}
+            if(txt_fecha_certificacion==''){mensaje+='* Debe elegir una fecha de certificacion \n';}
+            if(empleados== ''){mensaje+='* Debe elegir por lo menos un empleado \n';}
         }
         
         //RELACION ENTRE CERTIFICACION Y PENDIENTE O TAREA
         if(txt_fecha_certificacion!=''){
-            if(txt_pendiente=='' && (tareas==''&&materiales==''&& empleados=='')){mensaje+="* Debe elejir algo que certificar \n";}
+            if(txt_pendiente=='' && (tareas==''&&materiales==''&& empleados=='')){mensaje+="* Debe elegir algo que certificar \n";}
         }
      
         // ENVIO DE ERRORES      
