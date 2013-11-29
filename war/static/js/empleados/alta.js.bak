@@ -59,6 +59,7 @@ function confirmar_modificacion(){
             return false;
         }
     }
+    txt_fecha_nac_alta=fecha_to_db(txt_fecha_nac_alta);
     if(typeof(txt_cuil)=='' || txt_cuil==null){
     	txt_cuil='';
     }
@@ -201,6 +202,7 @@ function confirmar_alta(){
         }
     }
     
+    txt_fecha_nac_alta=fecha_to_db(txt_fecha_nac_alta);
     var parametros={
         accion: 'A',
         txt_legajo_alta:      $("#txt_legajo_alta").val(),       

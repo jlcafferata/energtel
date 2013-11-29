@@ -130,13 +130,9 @@ obra=vecObra.get(0);
 			</td>
 		</tr>
 	</table>
-	<div class="row">
-		<div class="span2" style="text-align:right">Pendiente</div>
-		<div class="span3"><textarea name="txt_pendiente" id="txt_pendiente" style="width: 700px; height: 30px" value="<%=tareas_pendientes%>"><%=tareas_pendientes%></textarea></div>	
-	</div>
 	<fieldset>
 		<legend>Desgloce de trabajo</legend>
-		<div style="height: 150px; overflow: auto;">
+		<div style="height: 120px; overflow: auto;">
                         <table class="table table-hover table-bordered table-condensed" width="100%" id="tabla_tareas">
                                 <thead>
                                         <tr>
@@ -161,14 +157,22 @@ obra=vecObra.get(0);
                  </div>
 	</fieldset>
 	<div class="row">
-            <div id="div_observaciones" class="span8">
-		<div class="span2" style="text-align:right">Observaciones</div>
-		<div class="span6"><textarea name="txt_observacion" id="txt_observacion" style="width: 500px; height: 30px"></textarea></div> 
-            </div>	
-            <div class="span1"><h5>Total $</h5></div>
+		<div class="span2" style="text-align:right">Pendiente</div>
+		<div class="span10"><textarea name="txt_pendiente" id="txt_pendiente" style="width: 700px; height: 30px" value="<%=tareas_pendientes%>"><%=tareas_pendientes%></textarea>
+		</div>	
+	</div>
+	<div class="row">
+        <div id="div_observaciones" class="span12">
+			<div class="span2" style="text-align:right">Observaciones</div>
+			<div class="span10">
+			  <textarea name="txt_observacion" id="txt_observacion" style="width: 500px; height: 30px"></textarea>
+			</div>
+    	</div>
+	</div>
+	<div class="row">
+	        <div class="span9" style="text-align:right"><h5>Total $</h5></div>
             <div id="div_total" class="span3"><input type="text" id="precio_total" value="0" disabled></input></div>
-            
-        </div>    
+    </div>    
 	<div class="row">
 	    <div class="span3" style="text-align:right" id="boton_guardar"><input type="button" class="btn btn-primary" value="Guardar" onclick="javascript:guardar_registro_avance(document.getElementById('accion').value)"></div>
             <div class="span3" style="text-align:right" id="boton_avaces_previos"><a class="btn btn-default my-link" href="javascript: irAvancesPrevios(<%=poa%>,<%=cod_tipo_obra%>,<%=cod_zona%>)">Avances Previos</a></div>

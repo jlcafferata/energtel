@@ -61,7 +61,7 @@ function fecha_DDMMYYYY_to_db(fecha){
           anio_alta=fecha.substring(4,8);
       } else if(fecha.length==9){
           guion_mes_corto_alta=fecha.substring(4,5);
-          if(guion_mes_corto_alta=='-'){
+          if(guion_mes_corto_alta=='/'){
               mes_alta='0'+fecha.substring(3,4);
               dia_alta=fecha.substring(0,2);
           } else{

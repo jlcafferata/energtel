@@ -247,14 +247,18 @@ function guardar_registro_avance(accion){
                          }
                          // TOMA LOS VALORES DE STOCK PROPIO
                          var child_td=$(this).children("td");
-                         var aux_tarea="txt_tarea_"+child_td[1].id;
-                         var cant_tarea_realizada=$("#"+aux_tarea).val();
+                         console.dir(child_td[1]);
+                         console.log(child_td[1].id);
+                				 var aux_tarea="txt_tarea_"+child_td[1].id;
+                         alert(aux_tarea);
+                				 return false;
+                         /*var cant_tarea_realizada=$("#"+aux_tarea).val();
                          if(cant_tarea_realizada=='' || cant_tarea_realizada=='undefined'){cant_tarea_realizada="0";}
                          var id_tarea=$(this).attr('id').split('_');
-                         tareas+=id_tarea[1]+"-"+cant_tarea_realizada;
+                         tareas+=id_tarea[1]+"-"+cant_tarea_realizada;*/
             }); 
             
-            var parametros={
+            /*var parametros={
                 accion: 'IE',
                 poa_alta:                       $("#txt_poa_ejecucion").val(),   
                 tipo_obra_alta:                 $("#cbo_tipo_obra_aejecucion").val(), 
@@ -270,7 +274,7 @@ function guardar_registro_avance(accion){
             console.log(parametros);
             pasarEjecucion(parametros);            
             $('#myModal').modal('hide');
-              
+              */  
         }
 }
 
